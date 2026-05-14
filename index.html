@@ -1,0 +1,1205 @@
+﻿<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auktivo – KI-Analyse für Zwangsversteigerungen</title>
+  <meta name="description" content="Auktivo analysiert Zwangsversteigerungsgutachten in 5–10 Minuten statt 1,5–3 Stunden. KI-Risikoanalyse, OCR-Pipeline, KI-Chat-Assistent. DSGVO-konform, entwickelt in Deutschland.">
+  <meta name="theme-color" content="#070b14">
+  <meta property="og:title" content="Auktivo – KI-Analyse für Zwangsversteigerungen">
+  <meta property="og:description" content="KI-Risikoanalyse, OCR-Pipeline und KI-Chat für Zwangsversteigerungsgutachten – in 5–10 Minuten statt 1,5–3 Stunden.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-bg:          #f8fafc;
+      --color-bg-alt:      #f1f5f9;
+      --color-surface:     #ffffff;
+      --color-accent:      #6366f1;
+      --color-accent-dim:  #4f46e5;
+      --color-text-main:   #0f172a;
+      --color-muted:       #475569;
+      --color-faint:       #94a3b8;
+      --color-dark-bg:     #070b14;
+      --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+      --font-display: 'Outfit', sans-serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text-main); }
+    h1, h2, h3, h4, .font-display { font-family: var(--font-display); }
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+  <!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
+  <header id="nav" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-300 py-4">
+    <div class="max-w-7xl mx-auto px-5 flex items-center justify-between gap-4">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 shrink-0">
+        <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-900/40">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+          </svg>
+        </div>
+        <span class="text-xl font-black tracking-tight text-white font-display">Auktivo</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1 bg-white/6 backdrop-blur border border-white/10 rounded-full px-2 py-1.5">
+        <a href="#features" class="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors rounded-full hover:bg-white/5" data-de="Features" data-en="Features">Features</a>
+        <a href="#how" class="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors rounded-full hover:bg-white/5" data-de="So funktioniert's" data-en="How it works">So funktioniert's</a>
+        <a href="#showcase" class="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors rounded-full hover:bg-white/5" data-de="App ansehen" data-en="See the App">App ansehen</a>
+        <a href="#roi" class="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors rounded-full hover:bg-white/5" data-de="Zeitersparnis" data-en="Time Savings">Zeitersparnis</a>
+        <a href="#pricing" class="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors rounded-full hover:bg-white/5" data-de="Preise" data-en="Pricing">Preise</a>
+      </nav>
+
+      <!-- Right side: Lang + CTA + mobile menu -->
+      <div class="flex items-center gap-3">
+        <!-- Language Toggle -->
+        <div class="lang-toggle hidden md:flex">
+          <button id="lang-de" class="lang-btn active-lang" aria-label="Deutsch">DE</button>
+          <button id="lang-en" class="lang-btn" aria-label="English">EN</button>
+        </div>
+
+        <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="hidden md:inline-flex items-center bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-lg shadow-indigo-900/40 active:scale-95" data-de="Kostenlos testen" data-en="Try for free">Kostenlos testen</a>
+
+        <!-- Mobile hamburger -->
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-expanded="false" aria-label="Menü">
+          <span class="w-5 h-0.5 bg-white/70 rounded"></span>
+          <span class="w-5 h-0.5 bg-white/70 rounded"></span>
+          <span class="w-5 h-0.5 bg-white/70 rounded"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Dropdown -->
+    <div id="mobile-nav" class="hidden md:hidden mt-2 mx-4 bg-slate-900/95 backdrop-blur border border-white/10 rounded-2xl p-4">
+      <div class="flex flex-col gap-1">
+        <a href="#features" class="px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-colors" data-de="Features" data-en="Features">Features</a>
+        <a href="#how" class="px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-colors" data-de="So funktioniert's" data-en="How it works">So funktioniert's</a>
+        <a href="#showcase" class="px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-colors" data-de="App ansehen" data-en="See the App">App ansehen</a>
+        <a href="#roi" class="px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-colors" data-de="Zeitersparnis" data-en="Time Savings">Zeitersparnis</a>
+        <a href="#pricing" class="px-4 py-3 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-colors" data-de="Preise" data-en="Pricing">Preise</a>
+        <hr class="border-white/10 my-2">
+        <div class="lang-toggle mx-4 mb-2 w-fit">
+          <button id="lang-de-m" class="lang-btn active-lang" aria-label="Deutsch">DE</button>
+          <button id="lang-en-m" class="lang-btn" aria-label="English">EN</button>
+        </div>
+        <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="bg-indigo-600 text-white px-4 py-3 rounded-xl font-semibold text-sm text-center transition-all" data-de="Kostenlos testen" data-en="Try for free">Kostenlos testen</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden" style="background:#070b14;">
+    <!-- Glow Orbs -->
+    <div class="orb w-[600px] h-[600px] bg-indigo-600/25 -top-32 -left-32"></div>
+    <div class="orb w-[500px] h-[500px] bg-violet-600/15 bottom-0 right-0" style="animation-delay:3s;"></div>
+
+    <div class="max-w-7xl mx-auto px-5 pt-28 pb-20 w-full">
+      <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+
+        <!-- Left: Text -->
+        <div class="flex-1 text-center lg:text-left">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 px-4 py-2 rounded-full mb-8 reveal">
+            <span class="flex h-2 w-2 rounded-full bg-indigo-400 animate-ping"></span>
+            <span class="text-indigo-300 text-xs font-bold uppercase tracking-widest" data-de="Neu: KI-Risikoanalyse für ZVG-Objekte" data-en="New: AI risk analysis for foreclosure objects">Neu: KI-Risikoanalyse für ZVG-Objekte</span>
+          </div>
+
+          <h1 class="text-5xl md:text-6xl xl:text-7xl font-black text-white mb-6 tracking-tight font-display leading-[1.05] reveal">
+            <span data-de="Zwangsversteigerungen." data-en="Foreclosure auctions.">Zwangsversteigerungen.</span><br>
+            <span class="gradient-text" data-de="Endlich transparent." data-en="Finally transparent.">Endlich transparent.</span>
+          </h1>
+
+          <p class="text-lg text-white/50 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 reveal" data-de="Auktivo liest Versteigerungsgutachten vollautomatisch: OCR-Pipeline wandelt PDF/TIF in Text, KI extrahiert Risikosignale. Prüfung in 5–10 Minuten statt 1,5–3 Stunden. Kein Fachanwalt, kein Chaos." data-en="Auktivo reads foreclosure appraisals fully automatically: OCR pipeline converts PDF/TIF to text, AI extracts risk signals. Review in 5–10 minutes instead of 1.5–3 hours. No specialist, no chaos.">
+            Auktivo liest Versteigerungsgutachten vollautomatisch: OCR-Pipeline wandelt PDF/TIF in Text, KI extrahiert Risikosignale. Prüfung in 5–10 Minuten statt 1,5–3 Stunden. Kein Fachanwalt, kein Chaos.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 justify-center lg:justify-start reveal">
+            <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-7 py-4 rounded-2xl font-bold text-base transition-all shadow-xl shadow-indigo-900/40 active:scale-95">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span data-de="Kostenlos testen" data-en="Try for free">Kostenlos testen</span>
+            </a>
+            <a href="#showcase" class="inline-flex items-center gap-2 border border-white/15 hover:border-white/30 text-white/75 hover:text-white px-7 py-4 rounded-2xl font-bold text-base transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              <span data-de="App ansehen" data-en="See the app">App ansehen</span>
+            </a>
+          </div>
+
+          <!-- Trust indicators -->
+          <div class="mt-10 flex flex-wrap items-center gap-5 justify-center lg:justify-start reveal">
+            <div class="flex items-center gap-2 text-white/35 text-xs font-medium">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              <span data-de="DSGVO-konform" data-en="GDPR compliant">DSGVO-konform</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/35 text-xs font-medium">
+              <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6H8l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
+              <span data-de="Entwickelt in Deutschland" data-en="Made in Germany">Entwickelt in Deutschland</span>
+            </div>
+            <div class="flex items-center gap-2 text-white/35 text-xs font-medium">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span data-de="Analyse in &lt; 10 Min." data-en="Analysis in &lt; 10 min.">Analyse in &lt; 10 Min.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: iPhone 15 Pro Titanium -->
+        <div class="flex-shrink-0 reveal flex flex-col items-center gap-6">
+          <div class="iphone-frame">
+            <div class="iphone-inner">
+              <div class="iphone-island"></div>
+              <div class="iphone-screen">
+
+                <!-- Screen 1: Dashboard -->
+                <div class="app-screen active screen-dashboard">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="screen-logo">auktivo</span>
+                    <div class="screen-avatar"></div>
+                  </div>
+                  <div class="kpi-grid">
+                    <div class="kpi-card">
+                      <div class="kpi-label">Heute neu</div>
+                      <div class="kpi-value kpi-amber">17</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Analysiert</div>
+                      <div class="kpi-value kpi-green">8</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Bayern</div>
+                      <div class="kpi-value kpi-blue">5</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Merkliste</div>
+                      <div class="kpi-value" style="color:#fff;">3</div>
+                    </div>
+                  </div>
+                  <div style="font-size:7px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin:4px 0 3px;">Neue Objekte</div>
+                  <div class="request-list-item">
+                    <div class="req-avatar"></div>
+                    <div class="req-info"><div class="req-name"></div><div class="req-date"></div></div>
+                    <span class="req-badge badge-green">Analysiert</span>
+                  </div>
+                  <div class="request-list-item">
+                    <div class="req-avatar" style="background:rgba(245,158,11,0.3);"></div>
+                    <div class="req-info"><div class="req-name"></div><div class="req-date"></div></div>
+                    <span class="req-badge badge-amber">Neu</span>
+                  </div>
+                  <div class="request-list-item">
+                    <div class="req-avatar" style="background:rgba(99,102,241,0.35);"></div>
+                    <div class="req-info"><div class="req-name"></div><div class="req-date"></div></div>
+                    <span class="req-badge badge-blue">Pro</span>
+                  </div>
+                </div>
+
+                <!-- Screen 2: Suche -->
+                <div class="app-screen screen-wizard">
+                  <div class="wizard-steps">
+                    <div class="wstep done"></div>
+                    <div class="wstep active"></div>
+                    <div class="wstep"></div>
+                    <div class="wstep"></div>
+                  </div>
+                  <div class="wizard-title">Objekt suchen</div>
+                  <div class="wizard-sub">PLZ, Umkreis &amp; Objekttyp</div>
+                  <div class="form-field">
+                    <div class="field-label">PLZ / Ort</div>
+                    <div class="field-value short" style="background:rgba(99,102,241,0.3);"></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                    <div class="form-field">
+                      <div class="field-label">Umkreis</div>
+                      <div class="field-value"></div>
+                    </div>
+                    <div class="form-field">
+                      <div class="field-label">km</div>
+                      <div class="field-value"></div>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <div class="field-label">Objekttyp</div>
+                    <div class="field-value" style="width:80%;"></div>
+                  </div>
+                  <div class="form-field">
+                    <div class="field-label">Verkehrswert bis</div>
+                    <div class="field-value"></div>
+                  </div>
+                  <div class="wizard-btn"><span class="wizard-btn-text">Suchen →</span></div>
+                </div>
+
+                <!-- Screen 3: Risikoanalyse -->
+                <div class="app-screen screen-calendar">
+                  <div class="cal-header">
+                    <span class="cal-title">Risikoanalyse</span>
+                    <span class="cal-month">Bayern 2026</span>
+                  </div>
+                  <div class="cal-grid">
+                    <div class="cal-day-label">Mo</div><div class="cal-day-label">Di</div><div class="cal-day-label">Mi</div>
+                    <div class="cal-day-label">Do</div><div class="cal-day-label">Fr</div><div class="cal-day-label">Sa</div><div class="cal-day-label">So</div>
+                    <div class="cal-day empty">30</div><div class="cal-day">1</div><div class="cal-day">2</div>
+                    <div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day ev-amber">5</div><div class="cal-day ev-amber">6</div>
+                    <div class="cal-day ev-blue">7</div><div class="cal-day ev-blue">8</div><div class="cal-day ev-blue">9</div>
+                    <div class="cal-day ev-blue">10</div><div class="cal-day ev-blue">11</div><div class="cal-day">12</div><div class="cal-day">13</div>
+                    <div class="cal-day">14</div><div class="cal-day today-d">15</div><div class="cal-day ev-green">16</div>
+                    <div class="cal-day ev-green">17</div><div class="cal-day ev-green">18</div><div class="cal-day">19</div><div class="cal-day">20</div>
+                    <div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
+                    <div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div>
+                    <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
+                    <div class="cal-day empty">1</div><div class="cal-day empty">2</div><div class="cal-day empty">3</div><div class="cal-day empty">4</div>
+                  </div>
+                  <div class="cal-legend">
+                    <div class="legend-item"><div class="leg-dot" style="background:#818cf8;"></div>Analysiert</div>
+                    <div class="legend-item"><div class="leg-dot" style="background:#f59e0b;"></div>Neu heute</div>
+                    <div class="legend-item"><div class="leg-dot" style="background:#ef4444;"></div>Hohes Risiko</div>
+                  </div>
+                </div>
+
+              </div><!-- /iphone-screen -->
+            </div><!-- /iphone-inner -->
+          </div><!-- /iphone-frame -->
+
+          <!-- Floating notification -->
+          <div class="toast-animate flex items-center gap-3 bg-slate-800/90 backdrop-blur border border-white/10 px-4 py-3 rounded-2xl shadow-2xl text-sm text-white" style="max-width:230px;">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div>
+              <div class="font-semibold text-xs" data-de="Neue Versteigerung erkannt" data-en="New auction detected">Neue Versteigerung erkannt</div>
+              <div class="text-white/40 text-[10px]" data-de="KI-Analyse gestartet …" data-en="AI analysis started …">KI-Analyse gestartet …</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TRUST BAR ═════════════════════════════════════════════ -->
+  <section style="background:#0c1120;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);" class="py-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 mb-5">
+      <p class="text-center text-white/25 text-xs font-semibold uppercase tracking-widest" data-de="Technologie-Stack" data-en="Technology stack">Technologie-Stack</p>
+    </div>
+    <div class="relative overflow-hidden">
+      <div class="marquee-track" style="width:max-content;">
+        <!-- Set 1 -->
+        <div class="trust-logo">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6H8l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+          </svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">ZVG-Portal</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M63.7 0H44.3l-8 22.6 27.4 0L63.7 0z" fill="#3ECF8E"/><path d="M0 71.2l9.4 26.6 23.3-13.3L0 71.2z" fill="#3ECF8E" opacity=".7"/><path d="M109 71.2l-32.7 13.3 23.3 13.3L109 71.2z" fill="#3ECF8E" opacity=".5"/><ellipse cx="54.1" cy="63.1" rx="28.3" ry="28.3" fill="#3ECF8E"/></svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">Supabase</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#635bff">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M11.5 8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zm-2 7.5h6v-5h-6v5z" fill="white"/>
+          </svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">Stripe</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">KI-Analyse</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);" data-de="DSGVO-konform" data-en="GDPR compliant">DSGVO-konform</span>
+        </div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="trust-logo">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6H8l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+          </svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">ZVG-Portal</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M63.7 0H44.3l-8 22.6 27.4 0L63.7 0z" fill="#3ECF8E"/><path d="M0 71.2l9.4 26.6 23.3-13.3L0 71.2z" fill="#3ECF8E" opacity=".7"/><path d="M109 71.2l-32.7 13.3 23.3 13.3L109 71.2z" fill="#3ECF8E" opacity=".5"/><ellipse cx="54.1" cy="63.1" rx="28.3" ry="28.3" fill="#3ECF8E"/></svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">Supabase</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#635bff">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M11.5 8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zm-2 7.5h6v-5h-6v5z" fill="white"/>
+          </svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">Stripe</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);">KI-Analyse</span>
+        </div>
+        <div class="trust-logo">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span style="font-size:.875rem;font-weight:600;color:rgba(255,255,255,0.65);" data-de="DSGVO-konform" data-en="GDPR compliant">DSGVO-konform</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═════════════════════════════════════════ -->
+  <section id="how" class="py-28" style="background:#f8fafc;">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-16 reveal">
+        <div class="section-chip mb-5" data-de="So funktioniert's" data-en="How it works">So funktioniert's</div>
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight mb-4" data-de="Drei Schritte. Keine Stunden." data-en="Three steps. No hours wasted.">Drei Schritte. Keine Stunden.</h2>
+        <p class="text-slate-500 text-lg max-w-xl mx-auto" data-de="Vom Suchbegriff bis zum vollständigen Risikobericht – vollautomatisch in Minuten." data-en="From search term to complete risk report – fully automated in minutes.">Vom Suchbegriff bis zum vollständigen Risikobericht – vollautomatisch in Minuten.</p>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0 justify-center">
+        <!-- Step 1 -->
+        <div class="flex-1 flex flex-col items-center text-center px-6 reveal">
+          <div class="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center mb-5 shadow-lg shadow-indigo-200">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-black text-sm flex items-center justify-center mb-3">1</div>
+          <h3 class="font-bold text-slate-900 text-xl mb-2" data-de="Objekt suchen" data-en="Search for property">Objekt suchen</h3>
+          <p class="text-slate-500 text-sm leading-relaxed" data-de="PLZ, Umkreis und Objekttyp eingeben. Auktivo zeigt alle aktuellen Zwangsversteigerungstermine aus dem staatlichen ZVG-Portal." data-en="Enter postcode, radius and property type. Auktivo shows all current foreclosure dates from the official ZVG portal.">PLZ, Umkreis und Objekttyp eingeben. Auktivo zeigt alle aktuellen Zwangsversteigerungstermine aus dem staatlichen ZVG-Portal.</p>
+        </div>
+
+        <div class="step-connector hidden md:block"></div>
+
+        <!-- Step 2 -->
+        <div class="flex-1 flex flex-col items-center text-center px-6 reveal">
+          <div class="w-16 h-16 rounded-2xl bg-violet-600 flex items-center justify-center mb-5 shadow-lg shadow-violet-200">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-violet-100 text-violet-700 font-black text-sm flex items-center justify-center mb-3">2</div>
+          <h3 class="font-bold text-slate-900 text-xl mb-2" data-de="KI analysiert das Gutachten" data-en="AI analyses the appraisal">KI analysiert das Gutachten</h3>
+          <p class="text-slate-500 text-sm leading-relaxed" data-de="Auktivo liest das PDF- oder TIF-Gutachten per OCR, wandelt es in Text um und extrahiert Risikosignale wie Baulasten, Sanierungsrückstände und Grundbuchbelastungen." data-en="Auktivo reads the PDF or TIF appraisal via OCR, converts it to text and extracts risk signals like land charges, renovation backlogs and encumbrances.">Auktivo liest das PDF- oder TIF-Gutachten per OCR, wandelt es in Text um und extrahiert Risikosignale wie Baulasten, Sanierungsrückstände und Grundbuchbelastungen.</p>
+        </div>
+
+        <div class="step-connector hidden md:block"></div>
+
+        <!-- Step 3 -->
+        <div class="flex-1 flex flex-col items-center text-center px-6 reveal">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-600 flex items-center justify-center mb-5 shadow-lg shadow-emerald-200">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-black text-sm flex items-center justify-center mb-3">3</div>
+          <h3 class="font-bold text-slate-900 text-xl mb-2" data-de="Risikobericht lesen &amp; entscheiden" data-en="Read risk report &amp; decide">Risikobericht lesen &amp; entscheiden</h3>
+          <p class="text-slate-500 text-sm leading-relaxed" data-de="KI-Analyse und Chat-Assistent beantworten Rückfragen zum Gutachten. Objekt auf Merkliste setzen oder Alarm für neue Termine konfigurieren." data-en="AI analysis and chat assistant answer follow-up questions about the appraisal. Add to favourites or configure alerts for new dates.">KI-Analyse und Chat-Assistent beantworten Rückfragen zum Gutachten. Objekt auf Merkliste setzen oder Alarm für neue Termine konfigurieren.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HAUPTFUNKTIONEN (BENTO GRID) ═════════════════════════ -->
+  <section id="features" class="py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-16 reveal">
+        <div class="section-chip mb-5" data-de="Kernfunktionen" data-en="Core features">Kernfunktionen</div>
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight mb-4" data-de="Was Auktivo wirklich kann." data-en="What Auktivo really does.">Was Auktivo wirklich kann.</h2>
+        <p class="text-slate-500 text-lg max-w-xl mx-auto" data-de="Echte Funktionen aus der App – keine Marketingversprechen." data-en="Real features from the app – no marketing promises.">Echte Funktionen aus der App – keine Marketingversprechen.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- CARD 1: Täglicher Crawler (large, 2-col) -->
+        <div class="bento-card lg:col-span-2 p-8 reveal">
+          <div class="flex flex-col h-full">
+            <div class="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center mb-5 shadow-lg shadow-indigo-100">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-2" data-de="Täglicher Crawler" data-en="Daily crawler">Täglicher Crawler</h3>
+            <p class="text-slate-500 mb-6" data-de="Auktivo importiert täglich alle Zwangsversteigerungstermine aus dem staatlichen ZVG-Portal der deutschen Amtsgerichte. Keine manuelle Suche, keine verpassten Objekte." data-en="Auktivo imports all foreclosure dates daily from the official ZVG portal of German district courts. No manual search, no missed properties.">Auktivo importiert täglich alle Zwangsversteigerungstermine aus dem staatlichen ZVG-Portal der deutschen Amtsgerichte. Keine manuelle Suche, keine verpassten Objekte.</p>
+            <!-- Search results mockup -->
+            <div class="mt-auto bg-slate-50 rounded-2xl p-5 border border-slate-100">
+              <div class="text-xs font-semibold text-indigo-600 mb-3" data-de="17 neue Objekte heute" data-en="17 new properties today">17 neue Objekte heute</div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-xl p-3 border border-slate-200">
+                  <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wide mb-1.5" data-de="Objekttyp" data-en="Property type">Objekttyp</div>
+                  <div class="text-sm font-bold text-indigo-600" data-de="Einfamilienhaus" data-en="Detached house">Einfamilienhaus</div>
+                </div>
+                <div class="bg-white rounded-xl p-3 border border-slate-200">
+                  <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wide mb-1.5" data-de="Verkehrswert" data-en="Market value">Verkehrswert</div>
+                  <div class="text-sm font-bold text-slate-700">320.000 €</div>
+                </div>
+                <div class="bg-white rounded-xl p-3 border border-slate-200">
+                  <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wide mb-1.5" data-de="Termin" data-en="Date">Termin</div>
+                  <div class="text-sm font-semibold text-slate-700">14.07.2026</div>
+                </div>
+                <div class="bg-white rounded-xl p-3 border border-slate-200">
+                  <div class="text-[10px] text-slate-400 font-semibold uppercase tracking-wide mb-1.5" data-de="Amtsgericht" data-en="District court">Amtsgericht</div>
+                  <div class="text-sm font-semibold text-slate-700">München</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: E-Mail Versand -->
+        <div class="bento-card p-8 reveal">
+          <div class="w-12 h-12 rounded-2xl bg-violet-600 flex items-center justify-center mb-5 shadow-lg shadow-violet-100">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2" data-de="KI-Risikoanalyse" data-en="AI risk analysis">KI-Risikoanalyse</h3>
+          <p class="text-slate-500 text-sm mb-5" data-de="Die KI liest das Gutachten und extrahiert kritische Risikosignale: Baulasten, Sanierungsrückstände, Mietprobleme und Grundbuchbelastungen – strukturiert und verständlich." data-en="The AI reads the appraisal and extracts critical risk signals: land charges, renovation backlogs, tenancy issues and mortgage encumbrances – structured and understandable.">Die KI liest das Gutachten und extrahiert kritische Risikosignale: Baulasten, Sanierungsrückstände, Mietprobleme und Grundbuchbelastungen – strukturiert und verständlich.</p>
+          <!-- Risk badges mockup -->
+          <div class="space-y-2.5 mt-auto">
+            <div class="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span class="text-xs font-semibold text-slate-600" data-de="Baulast erkannt" data-en="Land charge detected">Baulast erkannt</span>
+              <div class="ml-auto flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                <span class="text-[10px] font-bold text-red-600" data-de="Hohes Risiko" data-en="High risk">Hohes Risiko</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200">
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span class="text-xs font-semibold text-slate-600" data-de="Sanierungsrückstand" data-en="Renovation backlog">Sanierungsrückstand</span>
+              <div class="ml-auto flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                <span class="text-[10px] font-bold text-amber-600" data-de="Mittel" data-en="Medium">Mittel</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-2 px-1">
+              <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="text-[11px] text-slate-400" data-de="Grundbuchbelastungen geprüft" data-en="Encumbrances checked">Grundbuchbelastungen geprüft</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: Eigene Vorlagen -->
+        <div class="bento-card p-8 reveal">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500 flex items-center justify-center mb-5 shadow-lg shadow-amber-100">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2" data-de="OCR-Pipeline" data-en="OCR pipeline">OCR-Pipeline</h3>
+          <p class="text-slate-500 text-sm mb-5" data-de="Auktivo wandelt unleserliche PDF- und TIF-Gutachten vollautomatisch in durchsuchbaren Text um. Keine manuelle Eingabe, kein Formular – direkt aus dem ZVG-Portal." data-en="Auktivo automatically converts unreadable PDF and TIF appraisals into searchable text. No manual input, no form – directly from the ZVG portal.">Auktivo wandelt unleserliche PDF- und TIF-Gutachten vollautomatisch in durchsuchbaren Text um. Keine manuelle Eingabe, kein Formular – direkt aus dem ZVG-Portal.</p>
+          <!-- OCR mockup -->
+          <div class="mt-auto">
+            <div class="flex items-center gap-4 bg-amber-50 border-2 border-amber-200 rounded-2xl p-4">
+              <div class="w-12 h-14 bg-white border border-amber-200 rounded-lg shadow-sm flex flex-col items-center justify-center gap-1">
+                <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                <span class="text-[8px] font-black text-amber-600">TIF/PDF</span>
+              </div>
+              <div>
+                <div class="font-bold text-sm text-slate-800" data-de="OCR-Verarbeitung" data-en="OCR processing">OCR-Verarbeitung</div>
+                <div class="text-xs text-slate-500 mt-0.5" data-de="PDF/TIF → durchsuchbarer Text" data-en="PDF/TIF → searchable text">PDF/TIF → durchsuchbarer Text</div>
+                <div class="flex gap-1 mt-2">
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700" data-de="Vollautomatisch" data-en="Fully automated">Vollautomatisch</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: Kalender & Sync (large, 2-col) -->
+        <div class="bento-card lg:col-span-2 p-8 reveal">
+          <div class="flex flex-col md:flex-row gap-8 h-full">
+            <div class="flex-1">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-600 flex items-center justify-center mb-5 shadow-lg shadow-emerald-100">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-2" data-de="KI-Chat-Assistent" data-en="AI chat assistant">KI-Chat-Assistent</h3>
+              <p class="text-slate-500 mb-5" data-de="Der KI-Chat-Assistent beantwortet Rückfragen zum Gutachten in natürlicher Sprache: Risiken, Rechte, Belastungen – verständlich erklärt ohne Fachanwalt." data-en="The AI chat assistant answers follow-up questions about the appraisal in natural language: risks, rights, encumbrances – explained clearly without a specialist.">Der KI-Chat-Assistent beantwortet Rückfragen zum Gutachten in natürlicher Sprache: Risiken, Rechte, Belastungen – verständlich erklärt ohne Fachanwalt.</p>
+              <div class="flex flex-wrap gap-2">
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+                  <svg class="w-3.5 h-3.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                  <span class="text-xs font-semibold text-slate-600" data-de="Natürliche Sprache" data-en="Natural language">Natürliche Sprache</span>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+                  <svg class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  <span class="text-xs font-semibold text-slate-600" data-de="KI-gestützt" data-en="AI-powered">KI-gestützt</span>
+                </div>
+                <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
+                  <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  <span class="text-xs font-semibold text-emerald-700" data-de="Pro-Feature" data-en="Pro feature">Pro-Feature</span>
+                </div>
+              </div>
+            </div>
+            <!-- Chat UI mockup -->
+            <div class="flex-shrink-0 bg-slate-50 rounded-2xl p-4 border border-slate-100 w-full md:w-56">
+              <div class="text-xs font-bold text-slate-700 mb-3">KI-Chat</div>
+              <div class="space-y-2">
+                <div class="bg-indigo-600 text-white text-[10px] rounded-xl rounded-tl-none p-2.5 max-w-[90%]" data-de="Was bedeutet die Baulast im Gutachten?" data-en="What does the land charge in the appraisal mean?">Was bedeutet die Baulast im Gutachten?</div>
+                <div class="bg-white border border-slate-200 text-slate-700 text-[10px] rounded-xl rounded-tr-none p-2.5 ml-auto max-w-[90%]" data-de="Die eingetragene Baulast verpflichtet den Eigentümer zur Duldung eines Wegerechts. Dies kann den Wiederverkaufswert mindern." data-en="The registered land charge obliges the owner to tolerate a right of way. This may reduce the resale value.">Die eingetragene Baulast verpflichtet den Eigentümer zur Duldung eines Wegerechts. Dies kann den Wiederverkaufswert mindern.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ APP SHOWCASE ══════════════════════════════════════════ -->
+  <section id="showcase" style="background:#070b14;" class="py-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-12 reveal">
+        <div class="section-chip section-chip-dark mb-5" data-de="Live App-Ansicht" data-en="Live app view">Live App-Ansicht</div>
+        <h2 class="text-4xl md:text-5xl font-black text-white font-display tracking-tight mb-4" data-de="Die echte Oberfläche." data-en="The real interface.">Die echte Oberfläche.</h2>
+        <p class="text-white/45 text-lg max-w-xl mx-auto" data-de="Keine Marketing-Mockups – echte UI-Elemente aus der Auktivo-Anwendung." data-en="No marketing mockups – real UI elements from the Auktivo application.">Keine Marketing-Mockups – echte UI-Elemente aus der Auktivo-Anwendung.</p>
+      </div>
+
+      <!-- Tab buttons -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-6 justify-center reveal">
+        <button class="tab-btn active" data-tab="dashboard" data-de="Suche" data-en="Search">Suche</button>
+        <button class="tab-btn" data-tab="requests" data-de="Objekt-Detail" data-en="Property detail">Objekt-Detail</button>
+        <button class="tab-btn" data-tab="calendar" data-de="KI-Chat" data-en="AI chat">KI-Chat</button>
+        <button class="tab-btn" data-tab="admin" data-de="Merkliste" data-en="Favourites">Merkliste</button>
+      </div>
+
+      <div class="reveal">
+        <!-- TAB: Dashboard -->
+        <div id="tab-dashboard" class="tab-panel active">
+          <div class="app-window">
+            <div class="app-window-bar">
+              <div class="win-dot win-dot-red"></div>
+              <div class="win-dot win-dot-yellow"></div>
+              <div class="win-dot win-dot-green"></div>
+              <div class="win-url">auktivo.vercel.app/de/suche</div>
+            </div>
+            <div class="app-window-body">
+              <div class="app-sidebar">
+                <div class="sidebar-logo-row">
+                  <div class="sidebar-logo-icon">
+                    <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                  </div>
+                  <span class="sidebar-logo-text">auktivo</span>
+                </div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+                <div style="margin-top:auto; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06);">
+                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Alarm" data-en="Alerts">Alarm</span></div>
+                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Pro-Account" data-en="Pro Account">Pro-Account</span></div>
+                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Hilfe" data-en="Help">Hilfe</span></div>
+                </div>
+              </div>
+              <div class="app-content">
+                <div class="content-title" data-de="Guten Morgen, Investor 👋" data-en="Good morning, Investor 👋">Guten Morgen, Investor 👋</div>
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                  <div class="glass-card-dark rounded-xl p-3">
+                    <div style="font-size:9px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;" data-de="Heute neu" data-en="New today">Heute neu</div>
+                    <div style="font-size:22px;font-weight:800;color:#f59e0b;font-family:'Outfit',sans-serif;">17</div>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-3">
+                    <div style="font-size:9px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;" data-de="Analysiert" data-en="Analysed">Analysiert</div>
+                    <div style="font-size:22px;font-weight:800;color:#10b981;font-family:'Outfit',sans-serif;">8</div>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-3">
+                    <div style="font-size:9px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;" data-de="Merkliste" data-en="Favourites">Merkliste</div>
+                    <div style="font-size:22px;font-weight:800;color:#818cf8;font-family:'Outfit',sans-serif;">3</div>
+                  </div>
+                </div>
+                <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:8px;" data-de="Neue Objekte" data-en="New properties">Neue Objekte</div>
+                <div class="space-y-2">
+                  <div class="glass-card-dark rounded-xl p-2.5 flex items-center gap-3">
+                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(99,102,241,0.3);flex-shrink:0;"></div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:600;color:#fff;">Einfamilienhaus · München</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.35);">320.000 € · 14.07.2026</div>
+                    </div>
+                    <span class="status-badge badge-approved" data-de="Analysiert" data-en="Analysed">Analysiert</span>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-2.5 flex items-center gap-3">
+                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,0.3);flex-shrink:0;"></div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:600;color:#fff;">Eigentumswohnung · Hamburg</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.35);">185.000 € · 18.07.2026</div>
+                    </div>
+                    <span class="status-badge badge-pending" data-de="Neu" data-en="New">Neu</span>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-2.5 flex items-center gap-3">
+                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(239,68,68,0.2);flex-shrink:0;"></div>
+                    <div style="flex:1;">
+                      <div style="font-size:11px;font-weight:600;color:#fff;">Mehrfamilienhaus · Berlin</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,0.35);">650.000 € · 22.07.2026</div>
+                    </div>
+                    <span class="status-badge badge-rejected" data-de="Hohes Risiko" data-en="High risk">Hohes Risiko</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Meine Anträge -->
+        <div id="tab-requests" class="tab-panel">
+          <div class="app-window">
+            <div class="app-window-bar">
+              <div class="win-dot win-dot-red"></div><div class="win-dot win-dot-yellow"></div><div class="win-dot win-dot-green"></div>
+              <div class="win-url">auktivo.vercel.app/de/objekte/detail</div>
+            </div>
+            <div class="app-window-body">
+              <div class="app-sidebar">
+                <div class="sidebar-logo-row">
+                  <div class="sidebar-logo-icon"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
+                  <span class="sidebar-logo-text">auktivo</span>
+                </div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+              </div>
+              <div class="app-content">
+                <div class="content-title" data-de="Objekt-Detail" data-en="Property Detail">Objekt-Detail</div>
+                <!-- Property info pills -->
+                <div class="flex gap-2 mb-4">
+                  <div style="padding:4px 10px;border-radius:20px;background:#6366f1;color:#fff;font-size:10px;font-weight:700;" data-de="Einfamilienhaus" data-en="Detached house">Einfamilienhaus</div>
+                  <div style="padding:4px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:10px;font-weight:600;" data-de="München · 14.07.2026" data-en="Munich · 14.07.2026">München · 14.07.2026</div>
+                  <div style="padding:4px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:10px;font-weight:600;" data-de="320.000 €" data-en="€320,000">320.000 €</div>
+                </div>
+                <div class="space-y-2">
+                  <div class="glass-card-dark rounded-xl p-3 flex items-center gap-3">
+                    <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#fff;margin-bottom:2px;">Baulast (§ 1018 BGB)</div><div style="font-size:9px;color:rgba(255,255,255,0.35);">Wegerecht, dauerhaft eingetragen</div></div>
+                    <span class="status-badge badge-rejected">Hohes Risiko</span>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-3 flex items-center gap-3">
+                    <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#fff;margin-bottom:2px;">Sanierungsrückstand</div><div style="font-size:9px;color:rgba(255,255,255,0.35);">Dach 2015 erneuert, Heizung veraltet</div></div>
+                    <span class="status-badge badge-pending">Mittel</span>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-3 flex items-center gap-3">
+                    <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#fff;margin-bottom:2px;">Grundbuch Abt. III</div><div style="font-size:9px;color:rgba(255,255,255,0.35);">Keine Belastungen eingetragen</div></div>
+                    <span class="status-badge badge-approved">OK</span>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-3 flex items-center gap-3">
+                    <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#fff;margin-bottom:2px;">Mietrecht</div><div style="font-size:9px;color:rgba(255,255,255,0.35);">Selbstnutzung möglich, keine laufenden Mietverhältnisse</div></div>
+                    <span class="status-badge badge-approved">OK</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Kalender -->
+        <div id="tab-calendar" class="tab-panel">
+          <div class="app-window">
+            <div class="app-window-bar">
+              <div class="win-dot win-dot-red"></div><div class="win-dot win-dot-yellow"></div><div class="win-dot win-dot-green"></div>
+              <div class="win-url">auktivo.vercel.app/de/analyse/chat</div>
+            </div>
+            <div class="app-window-body">
+              <div class="app-sidebar">
+                <div class="sidebar-logo-row">
+                  <div class="sidebar-logo-icon"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
+                  <span class="sidebar-logo-text">auktivo</span>
+                </div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+              </div>
+              <div class="app-content">
+                <div class="content-title" data-de="KI-Chat-Assistent" data-en="AI Chat Assistant">KI-Chat-Assistent</div>
+                <div class="space-y-3">
+                  <div class="glass-card-dark rounded-xl p-2.5">
+                    <div class="text-[10px] text-indigo-400 font-bold mb-1" data-de="Du" data-en="You">Du</div>
+                    <div class="text-[10px] text-white" data-de="Was bedeutet Baulast Nummer 3 im Gutachten?" data-en="What does land charge number 3 in the appraisal mean?">Was bedeutet Baulast Nummer 3 im Gutachten?</div>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-2.5">
+                    <div class="text-[10px] text-emerald-400 font-bold mb-1" data-de="Auktivo KI" data-en="Auktivo AI">Auktivo KI</div>
+                    <div class="text-[10px] text-white/70" data-de="Baulast Nr. 3 ist ein Wegerecht zugunsten des Nachbargrundstücks. Es verpflichtet Sie zur dauerhaften Duldung der Durchquerung. Auswirkung auf den Marktwert: ca. –5–8 %." data-en="Land charge No. 3 is a right of way in favour of the neighbouring property. It obliges you to permanently tolerate passage. Impact on market value: approx. –5–8%.">Baulast Nr. 3 ist ein Wegerecht zugunsten des Nachbargrundstücks. Es verpflichtet Sie zur dauerhaften Duldung der Durchquerung. Auswirkung auf den Marktwert: ca. –5–8 %.</div>
+                  </div>
+                  <div class="glass-card-dark rounded-xl p-2.5">
+                    <div class="text-[10px] text-indigo-400 font-bold mb-1" data-de="Du" data-en="You">Du</div>
+                    <div class="text-[10px] text-white" data-de="Lohnt sich das Objekt trotzdem?" data-en="Is the property still worth it?">Lohnt sich das Objekt trotzdem?</div>
+                  </div>
+                </div>
+                <div class="glass-card-dark rounded-xl p-2.5 mt-3 flex items-center gap-2">
+                  <div style="flex:1;height:16px;background:rgba(255,255,255,0.06);border-radius:8px;"></div>
+                  <div style="width:20px;height:20px;background:#6366f1;border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="10" height="10" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Admin -->
+        <div id="tab-admin" class="tab-panel">
+          <div class="app-window">
+            <div class="app-window-bar">
+              <div class="win-dot win-dot-red"></div><div class="win-dot win-dot-yellow"></div><div class="win-dot win-dot-green"></div>
+              <div class="win-url">auktivo.vercel.app/de/merkliste</div>
+            </div>
+            <div class="app-window-body">
+              <div class="app-sidebar">
+                <div class="sidebar-logo-row">
+                  <div class="sidebar-logo-icon"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
+                  <span class="sidebar-logo-text">auktivo</span>
+                </div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item active" style="color:#f59e0b;background:rgba(245,158,11,0.1);"><div class="nav-dot" style="background:#f59e0b;"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Alarm" data-en="Alerts">Alarm</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Pro-Account" data-en="Pro Account">Pro-Account</span></div>
+              </div>
+              <div class="app-content">
+               <div class="content-title" data-de="Merkliste" data-en="Favourites">Merkliste</div>
+                <div class="flex items-center gap-2 mb-3 flex-wrap">
+                 <div style="padding:3px 10px;border-radius:20px;background:rgba(245,158,11,0.15);color:#f59e0b;font-size:9px;font-weight:700;border:1px solid rgba(245,158,11,0.2);" data-de="3 gespeicherte Objekte" data-en="3 saved properties">3 gespeicherte Objekte</div>
+                 <div style="padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:9px;font-weight:600;" data-de="+ Alarm einrichten" data-en="+ Set up alert">+ Alarm einrichten</div>
+               </div>
+               <!-- Table -->
+               <div style="font-size:9px;color:rgba(255,255,255,0.3);font-weight:600;display:grid;grid-template-columns:1fr 1fr auto;gap:8px;padding:6px 8px;text-transform:uppercase;letter-spacing:.05em;">
+                 <div data-de="Objekt" data-en="Property">Objekt</div><div data-de="Risiko" data-en="Risk">Risiko</div><div data-de="Wert" data-en="Value">Wert</div>
+               </div>
+               <div class="space-y-1.5">
+                 <div class="glass-card-dark rounded-lg p-2 flex items-center gap-3" style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;">
+                   <div style="font-size:11px;color:#fff;font-weight:600;">Einfamilienhaus, München</div>
+                   <span class="status-badge badge-pending" style="font-size:8px;">Mittel</span>
+                   <span style="font-size:8px;padding:1px 7px;border-radius:8px;background:rgba(99,102,241,0.15);color:#818cf8;font-weight:700;">320.000 €</span>
+                 </div>
+                 <div class="glass-card-dark rounded-lg p-2" style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;">
+                   <div style="font-size:11px;color:#fff;font-weight:600;">Eigentumswohnung, Hamburg</div>
+                   <span class="status-badge badge-approved" style="font-size:8px;">OK</span>
+                   <span style="font-size:8px;padding:1px 7px;border-radius:8px;background:rgba(99,102,241,0.15);color:#818cf8;font-weight:700;">185.000 €</span>
+                 </div>
+                 <div class="glass-card-dark rounded-lg p-2" style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;">
+                   <div style="font-size:11px;color:#fff;font-weight:600;">Mehrfamilienhaus, Berlin</div>
+                   <span class="status-badge badge-rejected" style="font-size:8px;">Hoch</span>
+                   <span style="font-size:8px;padding:1px 7px;border-radius:8px;background:rgba(99,102,241,0.15);color:#818cf8;font-weight:700;">650.000 €</span>
+                 </div>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ZUSATZFUNKTIONEN ═══════════════════════════════════════ -->
+  <section id="extras" class="py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-14 reveal">
+        <div class="section-chip mb-5" data-de="Weitere Funktionen" data-en="More features">Weitere Funktionen</div>
+        <h2 class="text-4xl font-black text-slate-900 font-display tracking-tight mb-4" data-de="Alles, was Einsteiger-Investoren brauchen." data-en="Everything beginner investors need.">Alles, was Einsteiger-Investoren brauchen.</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="glass-card rounded-2xl p-6 reveal">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg></div>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="Alarm-Funktion" data-en="Alert function">Alarm-Funktion</h3>
+          <p class="text-slate-500 text-sm" data-de="Push- oder E-Mail-Benachrichtigung bei neuen Zwangsversteigerungsterminen in deinem Suchgebiet. Nie mehr ein Objekt verpassen." data-en="Push or email notification for new foreclosure dates in your search area. Never miss a property again.">Push- oder E-Mail-Benachrichtigung bei neuen Zwangsversteigerungsterminen in deinem Suchgebiet. Nie mehr ein Objekt verpassen.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 reveal">
+          <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="Favoritenliste" data-en="Favourites list">Favoritenliste</h3>
+          <p class="text-slate-500 text-sm" data-de="Objekte auf die Merkliste setzen, Notizen hinzufügen und jederzeit wieder aufrufen. Pro-Feature." data-en="Save properties to your favourites, add notes and access them at any time. Pro feature.">Objekte auf die Merkliste setzen, Notizen hinzufügen und jederzeit wieder aufrufen. Pro-Feature.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 reveal">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="PDF-Download" data-en="PDF download">PDF-Download</h3>
+          <p class="text-slate-500 text-sm" data-de="Das vollständige Gutachten als PDF herunterladen und offline lesen – direkt aus der Auktivo-App, ohne manuelle ZVG-Portal-Suche." data-en="Download the complete appraisal as PDF and read it offline – directly from the Auktivo app, without manual ZVG portal searches.">Das vollständige Gutachten als PDF herunterladen und offline lesen – direkt aus der Auktivo-App, ohne manuelle ZVG-Portal-Suche.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 reveal">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="PLZ &amp; Umkreissuche" data-en="Postcode &amp; radius search">PLZ &amp; Umkreissuche</h3>
+          <p class="text-slate-500 text-sm" data-de="Suche nach PLZ, Umkreis in km und Objekttyp (Einfamilienhaus, Eigentumswohnung, Mehrfamilienhaus, Gewerbeobjekt)." data-en="Search by postcode, radius in km and property type (detached house, apartment, multi-family home, commercial property).">Suche nach PLZ, Umkreis in km und Objekttyp (Einfamilienhaus, Eigentumswohnung, Mehrfamilienhaus, Gewerbeobjekt).</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 reveal">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="DSGVO &amp; Sicherheit" data-en="GDPR &amp; Security">DSGVO &amp; Sicherheit</h3>
+          <p class="text-slate-500 text-sm" data-de="Authentifizierung via Supabase, rollenbasierter Zugriff (RLS), Datenspeicherung ausschließlich in der EU." data-en="Authentication via Supabase, role-based access (RLS), data storage exclusively in the EU.">Authentifizierung via Supabase, rollenbasierter Zugriff (RLS), Datenspeicherung ausschließlich in der EU.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 reveal">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="KI-Disclaimer" data-en="AI disclaimer">KI-Disclaimer</h3>
+          <p class="text-slate-500 text-sm" data-de="Alle KI-Analysen und Chat-Antworten dienen ausschließlich der Orientierung. Sie ersetzen keine rechtliche, steuerliche oder bautechnische Fachberatung." data-en="All AI analyses and chat responses are for guidance only. They do not replace professional legal, tax or structural advice.">Alle KI-Analysen und Chat-Antworten dienen ausschließlich der Orientierung. Sie ersetzen keine rechtliche, steuerliche oder bautechnische Fachberatung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ROI RECHNER ═══════════════════════════════════════════ -->
+  <section id="roi" style="background:#070b14;" class="py-28 relative overflow-hidden">
+    <div class="orb w-96 h-96 bg-indigo-700/20 top-0 right-0"></div>
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-16 reveal">
+        <div class="section-chip section-chip-dark mb-5" data-de="ROI Rechner" data-en="ROI Calculator">ROI Rechner</div>
+        <h2 class="text-4xl md:text-5xl font-black text-white font-display tracking-tight mb-4" data-de="Wie viel Zeit verlierst du?" data-en="How much time are you losing?">Wie viel Zeit verlierst du?</h2>
+        <p class="text-white/45 text-lg max-w-xl mx-auto" data-de="Berechne deine mögliche Zeitersparnis durch Auktivo – transparent, ohne erfundene Zahlen." data-en="Calculate your potential time savings with Auktivo – transparent, no made-up numbers.">Berechne deine mögliche Zeitersparnis durch Auktivo – transparent, ohne erfundene Zahlen.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Sliders -->
+        <div class="reveal">
+          <div class="space-y-10">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <label class="text-sm font-bold uppercase tracking-widest text-indigo-400" data-de="Objekte / Monat" data-en="Properties / month">Objekte / Monat</label>
+                <span id="employee-count-label" class="text-2xl font-black text-white font-display">5</span>
+              </div>
+              <input type="range" id="employee-slider" min="1" max="20" value="5">
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <label class="text-sm font-bold uppercase tracking-widest text-indigo-400" data-de="Aufwand je Objekt (Min.)" data-en="Effort per property (min.)">Aufwand je Objekt (Min.)</label>
+                <span id="request-count-label" class="text-2xl font-black text-white font-display">90</span>
+              </div>
+              <input type="range" id="request-slider" min="60" max="180" value="90">
+            </div>
+          </div>
+          <!-- Disclaimer -->
+          <div class="mt-8 flex gap-3 p-4 rounded-2xl bg-white/4 border border-white/8">
+            <svg class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p class="text-white/35 text-xs leading-relaxed" data-de="Schätzung: Basis ist ein manueller Aufwand von 60–180 Min. je Objekt (ZVG-Portal, PDF öffnen, Gutachten lesen, Risiken erfassen) gegenüber ~8 Min. mit Auktivo-KI. Interner Stundensatz: 50 €/h. Eigene Werte können abweichen." data-en="Estimate: Based on manual effort of 60–180 min. per property (ZVG portal, opening PDF, reading appraisal, recording risks) versus ~8 min. with Auktivo AI. Internal hourly rate: €50/h. Your actual values may differ.">Schätzung: Basis ist ein manueller Aufwand von 60–180 Min. je Objekt gegenüber ~8 Min. mit Auktivo-KI. Interner Stundensatz: 50 €/h. Eigene Werte können abweichen.</p>
+          </div>
+        </div>
+        <!-- Result -->
+        <div class="relative reveal">
+          <div class="absolute inset-0 bg-indigo-600/15 blur-3xl rounded-full"></div>
+          <div class="glass-card-dark border border-white/10 p-10 rounded-3xl text-center relative">
+            <div class="text-indigo-400 text-xs font-bold uppercase tracking-widest mb-4" data-de="Geschätzte jährliche Zeitersparnis" data-en="Estimated annual time saving">Geschätzte jährliche Zeitersparnis</div>
+            <div id="savings-value" class="text-6xl font-black text-white mb-3 font-display transition-transform">688 €</div>
+            <div class="text-white/40 mb-8 text-sm">≈ <span id="hours-value" class="text-white font-bold">14 Std.</span> <span data-de="weniger manuelle Arbeit pro Jahr" data-en="less manual work per year">weniger manuelle Arbeit pro Jahr</span></div>
+            <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="block w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-indigo-900/40" data-de="Jetzt Zeit sparen" data-en="Save time now">Jetzt Zeit sparen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRICING ════════════════════════════════════════════════ -->
+  <section id="pricing" class="py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="text-center mb-16 reveal">
+        <div class="section-chip mb-5" data-de="Preise" data-en="Pricing">Preise</div>
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight mb-4" data-de="Einfach. Transparent. Skalierbar." data-en="Simple. Transparent. Scalable.">Einfach. Transparent. Skalierbar.</h2>
+        <p class="text-slate-500 text-lg max-w-xl mx-auto" data-de="Keine versteckten Kosten. Jederzeit kündbar." data-en="No hidden costs. Cancel at any time.">Keine versteckten Kosten. Jederzeit kündbar.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-3xl mx-auto">
+
+        <!-- Free -->
+        <div class="pricing-card reveal">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3" data-de="FREE" data-en="FREE">FREE</div>
+          <div class="flex items-end gap-1 mb-1">
+            <div class="text-4xl font-black text-slate-900 font-display">0 €</div>
+            <div class="text-slate-400 text-sm mb-1.5" data-de="/ Monat" data-en="/ month">/ Monat</div>
+          </div>
+          <div class="text-slate-400 text-sm mb-6" data-de="5 Suchanfragen / Monat" data-en="5 searches / month">5 Suchanfragen / Monat</div>
+          <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="block w-full text-center border border-slate-200 hover:border-indigo-400 text-slate-700 hover:text-indigo-600 py-3 rounded-xl font-semibold text-sm transition-all mb-6" data-de="Kostenlos starten" data-en="Start for free">Kostenlos starten</a>
+          <div class="space-y-1">
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Bis zu 5 Suchen pro Monat" data-en="Up to 5 searches per month">Bis zu 5 Suchen pro Monat</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="PLZ-Suche &amp; Radius-Filter" data-en="Postcode search &amp; radius filter">PLZ-Suche &amp; Radius-Filter</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Tägliche ZVG-Portal-Daten" data-en="Daily ZVG portal data">Tägliche ZVG-Portal-Daten</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="OCR-Gutachtenverarbeitung" data-en="OCR appraisal processing">OCR-Gutachtenverarbeitung</span></div>
+            <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="KI-Risikoanalyse" data-en="AI risk analysis">KI-Risikoanalyse</span></div>
+            <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="KI-Chat-Assistent" data-en="AI chat assistant">KI-Chat-Assistent</span></div>
+            <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="Unbegrenzte Suchen" data-en="Unlimited searches">Unbegrenzte Suchen</span></div>
+            <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="Alarm &amp; Benachrichtigungen" data-en="Alerts &amp; notifications">Alarm &amp; Benachrichtigungen</span></div>
+          </div>
+        </div>
+
+        <!-- Pro (featured) -->
+        <div class="pricing-card featured reveal">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg" data-de="Empfohlen" data-en="Recommended">Empfohlen</div>
+          <div class="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">PRO</div>
+          <div class="flex items-end gap-1 mb-1">
+            <div class="text-4xl font-black text-slate-900 font-display">9,99 €</div>
+            <div class="text-slate-400 text-sm mb-1.5" data-de="/ Monat" data-en="/ month">/ Monat</div>
+          </div>
+          <div class="text-slate-400 text-sm mb-6" data-de="Unbegrenzte Suchen · Alle KI-Features" data-en="Unlimited searches · All AI features">Unbegrenzte Suchen · Alle KI-Features</div>
+          <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="block w-full text-center bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-xl font-semibold text-sm transition-all mb-6 shadow-lg shadow-indigo-100" data-de="Pro testen" data-en="Try Pro">Pro testen</a>
+          <div class="space-y-1">
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Alles aus Free" data-en="Everything in Free">Alles aus Free</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Unbegrenzte Suchen" data-en="Unlimited searches">Unbegrenzte Suchen</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="KI-Risikoanalyse (Baulasten, Grundbuch, …)" data-en="AI risk analysis (land charges, land register, …)">KI-Risikoanalyse (Baulasten, Grundbuch, …)</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="KI-Chat-Assistent" data-en="AI chat assistant">KI-Chat-Assistent</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Alarm &amp; Push-Benachrichtigungen" data-en="Alert &amp; push notifications">Alarm &amp; Push-Benachrichtigungen</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="PDF-Download" data-en="PDF download">PDF-Download</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Merkliste &amp; Favoriten" data-en="Watchlist &amp; favourites">Merkliste &amp; Favoriten</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Prioritäts-Support" data-en="Priority support">Prioritäts-Support</span></div>
+          </div>
+        </div>
+
+        <!-- Innovation Package -->
+        <div class="innovation-card reveal">
+          <div class="relative z-10">
+            <div class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">INNOVATION PACKAGE</div>
+            <div class="text-3xl font-black text-white font-display mb-1" data-de="Auf Anfrage" data-en="On request">Auf Anfrage</div>
+            <div class="text-white/40 text-sm mb-6" data-de="Auktivo + TRACE + TeamRadar im Bundle" data-en="Auktivo + TRACE + TeamRadar bundle">Auktivo + TRACE + TeamRadar im Bundle</div>
+            <a href="#" onclick="openContactModal();return false;" class="block w-full text-center border border-indigo-500/50 hover:border-indigo-400 text-indigo-300 hover:text-white py-3 rounded-xl font-semibold text-sm transition-all mb-6" data-de="Beratung anfragen" data-en="Request consultation">Beratung anfragen</a>
+            <div class="space-y-1">
+              <div class="pf-row" style="border-color:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);">
+                <svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span data-de="Alles aus Pro" data-en="Everything in Pro">Alles aus Pro</span>
+              </div>
+              <div class="pf-row" style="border-color:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);">
+                <svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong class="text-white">Auktivo</strong> <span data-de="– Versteigerungsanalyse" data-en="– Foreclosure analysis">– Versteigerungsanalyse</span></span>
+              </div>
+              <div class="pf-row" style="border-color:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);">
+                <svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong class="text-white">TRACE</strong> <span data-de="– Zeiterfassung (intern &amp; extern)" data-en="– Time tracking (internal &amp; external)">– Zeiterfassung (intern &amp; extern)</span></span>
+              </div>
+              <div class="pf-row" style="border-color:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);">
+                <svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span><strong class="text-white">TeamRadar</strong> <span data-de="– Verwaltung" data-en="– Management">– Verwaltung</span></span>
+              </div>
+              <div class="pf-row" style="border-color:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);">
+                <svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span data-de="Zentrales App-Portal (InApp oder Direktlink)" data-en="Central app portal (in-app or direct link)">Zentrales App-Portal (InApp oder Direktlink)</span>
+              </div>
+              <div class="pf-row" style="border-color:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);">
+                <svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span data-de="Dediziertes Onboarding" data-en="Dedicated onboarding">Dediziertes Onboarding</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ════════════════════════════════════════════════════ -->
+  <section id="faq" class="py-28 bg-white">
+    <div class="max-w-3xl mx-auto px-5">
+      <div class="text-center mb-12 reveal">
+        <div class="section-chip mb-5" data-de="FAQ" data-en="FAQ">FAQ</div>
+        <h2 class="text-4xl font-black text-slate-900 font-display tracking-tight" data-de="Häufige Fragen." data-en="Frequently asked questions.">Häufige Fragen.</h2>
+      </div>
+      <div class="space-y-3 reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Woher stammen die Versteigerungsdaten?" data-en="Where does the auction data come from?">Woher stammen die Versteigerungsdaten?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Auktivo importiert täglich alle Zwangsversteigerungstermine aus dem offiziellen ZVG-Portal der deutschen Amtsgerichte (zvg.justiz.de). Die Daten stammen direkt aus der staatlichen Quelle – keine Drittanbieter-Aggregatoren." data-en="Auktivo imports all foreclosure dates daily from the official ZVG portal of German district courts (zvg.justiz.de). The data comes directly from the government source – no third-party aggregators.">Auktivo importiert täglich alle Zwangsversteigerungstermine aus dem offiziellen ZVG-Portal der deutschen Amtsgerichte (zvg.justiz.de). Die Daten stammen direkt aus der staatlichen Quelle – keine Drittanbieter-Aggregatoren.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Wie funktioniert die KI-Risikoanalyse?" data-en="How does the AI risk analysis work?">Wie funktioniert die KI-Risikoanalyse?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Auktivo liest das Gutachten per OCR-Pipeline (PDF/TIF → Text) vollautomatisch ein und analysiert es mit einem KI-Modell. Die KI erkennt Baulasten, Sanierungsrückstände, Mietprobleme und Grundbuchbelastungen und bewertet diese als Niedrig-, Mittel- oder Hochrisiko. Alle Analysen dienen der Orientierung und ersetzen keine Fachberatung." data-en="Auktivo reads the appraisal automatically via an OCR pipeline (PDF/TIF → text) and analyses it with an AI model. The AI detects land charges, renovation backlogs, tenancy issues and mortgage encumbrances, rating them as low, medium or high risk. All analyses are for guidance only and do not replace professional advice.">Auktivo liest das Gutachten per OCR-Pipeline (PDF/TIF → Text) vollautomatisch ein und analysiert es mit einem KI-Modell. Alle Analysen dienen der Orientierung und ersetzen keine Fachberatung.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Wo werden meine Daten gespeichert?" data-en="Where is my data stored?">Wo werden meine Daten gespeichert?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Auktivo nutzt Supabase als Backend (Authentifizierung &amp; Datenbank). Die Datenspeicherung erfolgt ausschließlich auf EU-Servern. Die App ist vollständig DSGVO-konform entwickelt." data-en="Auktivo uses Supabase as its backend (authentication &amp; database). Data is stored exclusively on EU servers. The app is fully GDPR-compliant.">Auktivo nutzt Supabase als Backend (Authentifizierung &amp; Datenbank). Die Datenspeicherung erfolgt ausschließlich auf EU-Servern. Die App ist vollständig DSGVO-konform entwickelt.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Was unterscheidet Free von Pro?" data-en="What's the difference between Free and Pro?">Was unterscheidet Free von Pro?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Free erlaubt bis zu 5 Suchen pro Monat inkl. OCR-Verarbeitung – ohne KI-Risikoanalyse, KI-Chat oder Alarm-Funktionen. Pro hebt alle Grenzen auf: unbegrenzte Suchen, KI-Risikoanalyse, KI-Chat-Assistent, Alarm &amp; Push-Benachrichtigungen, PDF-Download und Prioritäts-Support für 9,99 €/Monat." data-en="Free allows up to 5 searches per month including OCR processing – without AI risk analysis, AI chat or alert features. Pro removes all limits: unlimited searches, AI risk analysis, AI chat assistant, alerts &amp; push notifications, PDF download and priority support for €9.99/month.">Free: bis 5 Suchen/Monat, OCR, kein KI-Chat, keine KI-Analyse, kein Alarm. Pro (9,99 €/Monat): unbegrenzte Suchen, KI-Risikoanalyse, KI-Chat, Alarm, PDF-Download, Prioritäts-Support.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Ist die KI-Analyse rechtlich bindend?" data-en="Is the AI analysis legally binding?">Ist die KI-Analyse rechtlich bindend?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Nein. Alle KI-Analysen und Chat-Antworten dienen ausschließlich der Orientierung. Sie ersetzen keine rechtliche, steuerliche oder bautechnische Fachberatung. Vor einer Kaufentscheidung empfehlen wir die Konsultation eines Fachanwalts oder Gutachters." data-en="No. All AI analyses and chat responses are for guidance purposes only. They do not replace legal, tax or structural professional advice. We recommend consulting a specialist lawyer or surveyor before making a purchase decision.">Nein. Alle KI-Analysen dienen ausschließlich der Orientierung und ersetzen keine rechtliche, steuerliche oder bautechnische Fachberatung.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Wie lange dauert die Einrichtung?" data-en="How long does setup take?">Wie lange dauert die Einrichtung?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Registrierung und erste Suche dauern unter 2 Minuten – kein Download, keine Installation, direkt im Browser. Auktivo ist eine responsive Web-App auf Basis von Next.js." data-en="Registration and first search take under 2 minutes – no download, no installation, directly in the browser. Auktivo is a responsive web app built on Next.js.">Registrierung und erste Suche dauern unter 2 Minuten – kein Download, keine Installation, direkt im Browser.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" data-de="Kann ich das Abo jederzeit kündigen?" data-en="Can I cancel the subscription anytime?">Kann ich das Abo jederzeit kündigen?
+            <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer" data-de="Ja. Pro-Abos können monatlich ohne Mindestlaufzeit gekündigt werden. Nach der Kündigung wird dein Konto automatisch auf Free zurückgestuft." data-en="Yes. Pro subscriptions can be cancelled monthly with no minimum term. After cancellation, your account is automatically downgraded to Free.">Ja, monatlich kündbar ohne Mindestlaufzeit. Nach Kündigung automatische Rückstufung auf Free.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FINAL CTA ══════════════════════════════════════════════ -->
+  <section style="background:#070b14;" class="py-28 relative overflow-hidden">
+    <div class="orb w-[500px] h-[500px] bg-indigo-700/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="max-w-4xl mx-auto px-5 text-center relative z-10 reveal">
+      <div class="text-indigo-400 text-xs font-bold uppercase tracking-widest mb-5" data-de="Jetzt loslegen" data-en="Get started">Jetzt loslegen</div>
+      <h2 class="text-4xl md:text-6xl font-black text-white font-display tracking-tight mb-6"><span data-de="Bereit für KI-gestützte Versteigerungsanalyse?" data-en="Ready for AI-powered foreclosure analysis?">Bereit für KI-gestützte Versteigerungsanalyse?</span></h2>
+      <p class="text-white/45 text-lg mb-10 max-w-xl mx-auto" data-de="Jetzt kostenlos starten – kein Gutachten mehr manuell lesen, kein Risiko mehr übersehen." data-en="Start free now – no more reading appraisals manually, no more overlooking risks.">Jetzt kostenlos starten – kein Gutachten mehr manuell lesen, kein Risiko mehr übersehen.</p>
+      <div class="flex flex-wrap items-center gap-4 justify-center">
+        <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold text-base transition-all shadow-xl shadow-indigo-900/40 active:scale-95" data-de="Kostenlos starten" data-en="Start free">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span data-de="Kostenlos starten" data-en="Start free">Kostenlos starten</span>
+        </a>
+        <a href="#showcase" class="inline-flex items-center gap-2 border border-white/15 hover:border-white/30 text-white/70 hover:text-white px-8 py-4 rounded-2xl font-bold text-base transition-all" data-de="App ansehen" data-en="See the app">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          <span data-de="App ansehen" data-en="See the app">App ansehen</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═════════════════════════════════════════════════ -->
+  <footer style="background:#04070d;border-top:1px solid rgba(255,255,255,0.06);" class="py-16">
+    <div class="max-w-7xl mx-auto px-5">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+        <!-- Brand -->
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-2.5 mb-5">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            </div>
+            <span class="text-lg font-black text-white font-display tracking-tight">Auktivo</span>
+          </div>
+          <p class="text-white/30 text-sm leading-relaxed mb-5" data-de="KI-gestützte Zwangsversteigerungsanalyse für private Investoren. Entwickelt von WAMOCON." data-en="AI-powered foreclosure analysis for private investors. Developed by WAMOCON.">KI-gestützte Zwangsversteigerungsanalyse für private Investoren. Entwickelt von WAMOCON.</p>
+          <!-- Germany badge -->
+          <div class="flex items-center gap-2 text-white/25 text-xs font-semibold">
+            <span>🇩🇪</span>
+            <span data-de="Entwickelt in Deutschland" data-en="Made in Germany">Entwickelt in Deutschland</span>
+          </div>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <h4 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-5" data-de="Produkt" data-en="Product">Produkt</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#features" class="text-white/35 hover:text-white transition-colors" data-de="Features" data-en="Features">Features</a></li>
+            <li><a href="#how" class="text-white/35 hover:text-white transition-colors" data-de="Wie es funktioniert" data-en="How it works">Wie es funktioniert</a></li>
+            <li><a href="#roi" class="text-white/35 hover:text-white transition-colors" data-de="Zeitersparnis" data-en="Time savings">Zeitersparnis</a></li>
+            <li><a href="#pricing" class="text-white/35 hover:text-white transition-colors" data-de="Preise" data-en="Pricing">Preise</a></li>
+            <li><a href="#faq" class="text-white/35 hover:text-white transition-colors">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Produktfamilie -->
+        <div>
+          <h4 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-5" data-de="Produktfamilie" data-en="Product family">Produktfamilie</h4>
+          <ul class="space-y-3 text-sm">
+            <li class="text-white/55 font-semibold flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>Auktivo
+              <span class="text-[10px] text-indigo-400/60 font-semibold ml-1" data-de="Versteigerungsanalyse" data-en="Foreclosure analysis">Versteigerungsanalyse</span>
+            </li>
+            <li class="text-white/35 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-teal-500"></span>TRACE
+              <span class="text-[10px] text-teal-400/60 font-semibold ml-1" data-de="Zeiterfassung" data-en="Time tracking">Zeiterfassung</span>
+            </li>
+            <li class="text-white/35 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-500"></span>TeamRadar
+              <span class="text-[10px] text-blue-400/60 font-semibold ml-1" data-de="Verwaltung" data-en="Management">Verwaltung</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Rechtliches -->
+        <div>
+          <h4 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-5" data-de="Rechtliches" data-en="Legal">Rechtliches</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="impressum.html" class="text-white/35 hover:text-white transition-colors" data-de="Impressum" data-en="Imprint">Impressum</a></li>
+            <li><a href="datenschutz.html" class="text-white/35 hover:text-white transition-colors" data-de="Datenschutz" data-en="Privacy policy">Datenschutz</a></li>
+            <li><a href="agb.html" class="text-white/35 hover:text-white transition-colors" data-de="AGB" data-en="Terms">AGB</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="border-t border-white/6 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/20 text-xs" data-de="© 2026 Auktivo. Ein Produkt der WAMOCON GmbH. Alle Rechte vorbehalten." data-en="© 2026 Auktivo. A product of WAMOCON GmbH. All rights reserved.">© 2026 Auktivo. Ein Produkt der WAMOCON GmbH. Alle Rechte vorbehalten.</p>
+        <div class="flex items-center gap-2 text-white/15 text-xs">
+          <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>
+          <span data-de="Alle Systeme betriebsbereit" data-en="All systems operational">Alle Systeme betriebsbereit</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ KONTAKTFORMULAR MODAL ════════════════════════════════ -->
+  <div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+       class="fixed inset-0 z-[300] flex items-center justify-center p-4"
+       style="display:none; background:rgba(4,7,13,0.82); backdrop-filter:blur(10px);">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg" style="max-height:92vh;overflow-y:auto;">
+
+      <!-- Letterhead Header (WAMOCON-Stil) -->
+      <div class="flex items-start justify-between px-8 pt-7 pb-5 border-b border-slate-100">
+        <div>
+          <div class="flex items-center gap-2.5 mb-1.5">
+            <div class="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            </div>
+            <span class="font-black text-slate-900 font-display tracking-tight">Auktivo</span>
+            <span class="text-slate-300 mx-1">|</span>
+            <span class="text-sm font-bold text-slate-500">WAMOCON GmbH</span>
+          </div>
+          <p class="text-xs text-slate-400 pl-9">Mergenthalerallee 79–81 · 65760 Eschborn</p>
+        </div>
+        <button onclick="closeContactModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-700 transition-colors shrink-0 mt-0.5" aria-label="Schließen">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Form Body -->
+      <div class="px-8 py-7">
+        <h3 id="modal-title" class="text-xl font-bold text-slate-900 font-display mb-1" data-de="Anfrage senden" data-en="Send enquiry">Anfrage senden</h3>
+        <p class="text-slate-400 text-sm mb-7" data-de="Pro-Upgrade, Fragen zur KI-Analyse oder allgemeine Produktanfrage" data-en="Pro upgrade, questions about AI analysis or general product enquiry">Pro-Upgrade, Fragen zur KI-Analyse oder allgemeine Produktanfrage</p>
+
+        <form id="contact-form" onsubmit="submitContactForm(event)" novalidate class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-name">Name *</label>
+              <input id="cf-name" type="text" required autocomplete="name"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                placeholder="Max Müller">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-email">E-Mail *</label>
+              <input id="cf-email" type="email" required autocomplete="email"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                placeholder="max@unternehmen.de">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-company">Unternehmen</label>
+            <input id="cf-company" type="text" autocomplete="organization"
+              class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              placeholder="Musterfirma GmbH">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-subject">Betreff</label>
+            <select id="cf-subject"
+              class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white">
+              <option value="Auktivo Pro – Upgrade">Auktivo Pro – Upgrade</option>
+              <option value="Frage zur KI-Analyse">Frage zur KI-Analyse</option>
+              <option value="Demo anfragen">Demo anfragen</option>
+              <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-message">Nachricht *</label>
+            <textarea id="cf-message" required rows="4"
+              class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none"
+              placeholder="Ich interessiere mich für Auktivo Pro oder habe eine Frage zur KI-Analyse ..."></textarea>
+          </div>
+
+          <div id="cf-error" class="hidden text-sm text-red-500 font-medium">Bitte Name, E-Mail und Nachricht ausfüllen.</div>
+
+          <button type="submit"
+            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-indigo-100 active:scale-95 flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Anfrage senden
+          </button>
+          <p class="text-center text-xs text-slate-400">Es öffnet sich dein E-Mail-Programm mit der vorausgefüllten Anfrage.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
