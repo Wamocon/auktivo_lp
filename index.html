@@ -676,10 +676,23 @@
               <div class="app-content">
                 <div class="content-title" data-de="Objekt-Detail" data-en="Property Detail">Objekt-Detail</div>
                 <!-- Property info pills -->
-                <div class="flex gap-2 mb-4">
+                <div class="flex gap-2 mb-3">
                   <div style="padding:4px 10px;border-radius:20px;background:#6366f1;color:#fff;font-size:10px;font-weight:700;" data-de="Einfamilienhaus" data-en="Detached house">Einfamilienhaus</div>
                   <div style="padding:4px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:10px;font-weight:600;" data-de="München · 14.07.2026" data-en="Munich · 14.07.2026">München · 14.07.2026</div>
                   <div style="padding:4px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:10px;font-weight:600;" data-de="320.000 €" data-en="€320,000">320.000 €</div>
+                </div>
+                <!-- PropertyImage (neu: Street View / aus Gutachten) -->
+                <div style="border-radius:10px;height:48px;background:linear-gradient(135deg,#1a2235 0%,#0f172a 100%);display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.07);overflow:hidden;position:relative;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:32px;height:32px;border-radius:7px;background:rgba(99,102,241,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <svg width="15" height="15" fill="none" stroke="#818cf8" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-linecap="round" stroke-linejoin="round"/><polyline points="9 22 9 12 15 12 15 22" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-size:9px;color:#e2e8f0;font-weight:600;" data-de="Lageansicht via Google Street View" data-en="Location view via Google Street View">Lageansicht via Google Street View</div>
+                      <div style="font-size:7px;color:rgba(255,255,255,0.3);" data-de="Automatisch für jedes Objekt" data-en="Automatically for every property">Automatisch für jedes Objekt</div>
+                    </div>
+                  </div>
+                  <span style="font-size:7px;padding:2px 6px;border-radius:4px;background:rgba(99,102,241,0.18);color:#818cf8;font-weight:700;white-space:nowrap;">NEU</span>
                 </div>
                 <div class="space-y-2">
                   <div class="glass-card-dark rounded-xl p-3 flex items-center gap-3">
@@ -825,8 +838,8 @@
         </div>
         <div class="glass-card rounded-2xl p-6 reveal">
           <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
-          <h3 class="font-bold text-slate-900 mb-2" data-de="PDF-Download" data-en="PDF download">PDF-Download</h3>
-          <p class="text-slate-500 text-sm" data-de="Das vollständige Gutachten als PDF herunterladen und offline lesen – direkt aus der Auktivo-App, ohne manuelle ZVG-Portal-Suche." data-en="Download the complete appraisal as PDF and read it offline – directly from the Auktivo app, without manual ZVG portal searches.">Das vollständige Gutachten als PDF herunterladen und offline lesen – direkt aus der Auktivo-App, ohne manuelle ZVG-Portal-Suche.</p>
+          <h3 class="font-bold text-slate-900 mb-2" data-de="PDF-Viewer &amp; Download" data-en="PDF Viewer &amp; Download">PDF-Viewer &amp; Download</h3>
+          <p class="text-slate-500 text-sm" data-de="Das Gutachten direkt im Browser ansehen oder als PDF herunterladen &ndash; ohne manuelle ZVG-Portal-Suche. Pro-Feature." data-en="View the appraisal directly in the browser or download as PDF &ndash; without manual ZVG portal searches. Pro feature.">Das Gutachten direkt im Browser ansehen oder als PDF herunterladen &ndash; ohne manuelle ZVG-Portal-Suche. Pro-Feature.</p>
         </div>
         <div class="glass-card rounded-2xl p-6 reveal">
           <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
@@ -923,7 +936,7 @@
             <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="KI-Risikoanalyse" data-en="AI risk analysis">KI-Risikoanalyse</span></div>
             <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="KI-Chat-Assistent" data-en="AI chat assistant">KI-Chat-Assistent</span></div>
             <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="Alarm-Funktion (Push/E-Mail)" data-en="Alert function (push/email)">Alarm-Funktion (Push/E-Mail)</span></div>
-            <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="Favoriten &amp; PDF-Download" data-en="Favourites &amp; PDF download">Favoriten &amp; PDF-Download</span></div>
+            <div class="pf-row"><svg class="cross-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg><span class="text-slate-400" data-de="Favoriten &amp; PDF-Viewer" data-en="Favourites &amp; PDF Viewer">Favoriten &amp; PDF-Viewer</span></div>
           </div>
         </div>
 
@@ -945,7 +958,7 @@
             <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="KI-Chat-Assistent" data-en="AI chat assistant">KI-Chat-Assistent</span></div>
             <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Alarm-Funktion (Push/E-Mail)" data-en="Alert function (push/email)">Alarm-Funktion (Push/E-Mail)</span></div>
             <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="Merkliste &amp; Favoriten" data-en="Watchlist &amp; favourites">Merkliste &amp; Favoriten</span></div>
-            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="PDF-Download" data-en="PDF download">PDF-Download</span></div>
+            <div class="pf-row"><svg class="check-ico w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span data-de="PDF-Viewer &amp; Download" data-en="PDF Viewer &amp; Download">PDF-Viewer &amp; Download</span></div>
           </div>
         </div>
 
@@ -1023,7 +1036,7 @@
           <button class="faq-question" data-de="Was unterscheidet Free von Pro?" data-en="What's the difference between Free and Pro?">Was unterscheidet Free von Pro?
             <svg class="faq-chevron w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
-          <div class="faq-answer" data-de="Free erlaubt bis zu 5 Suchen pro Monat inkl. OCR-Verarbeitung – ohne KI-Risikoanalyse, KI-Chat oder Alarm-Funktionen. Pro hebt alle Grenzen auf: unbegrenzte Suchen, KI-Risikoanalyse, KI-Chat-Assistent, Alarm &amp; Push-Benachrichtigungen, PDF-Download und Prioritäts-Support für 9,99 €/Monat." data-en="Free allows up to 5 searches per month including OCR processing – without AI risk analysis, AI chat or alert features. Pro removes all limits: unlimited searches, AI risk analysis, AI chat assistant, alerts &amp; push notifications, PDF download and priority support for €9.99/month.">Free: bis 5 Suchen/Monat, OCR, kein KI-Chat, keine KI-Analyse, kein Alarm. Pro (9,99 €/Monat): unbegrenzte Suchen, KI-Risikoanalyse, KI-Chat, Alarm, PDF-Download, Prioritäts-Support.</div>
+          <div class="faq-answer" data-de="Free erlaubt bis zu 5 Suchen pro Monat inkl. OCR-Verarbeitung &ndash; ohne KI-Risikoanalyse, KI-Chat oder Alarm-Funktionen. Pro hebt alle Grenzen auf: unbegrenzte Suchen, KI-Risikoanalyse, KI-Chat-Assistent, Alarm &amp; Push-Benachrichtigungen, PDF-Viewer &amp; Download und Prioritäts-Support für 9,99 €/Monat." data-en="Free allows up to 5 searches per month including OCR processing &ndash; without AI risk analysis, AI chat or alert features. Pro removes all limits: unlimited searches, AI risk analysis, AI chat assistant, alerts &amp; push notifications, PDF Viewer &amp; download and priority support for &euro;9.99/month.">Free: bis 5 Suchen/Monat, OCR, kein KI-Chat, keine KI-Analyse, kein Alarm. Pro (9,99 €/Monat): unbegrenzte Suchen, KI-Risikoanalyse, KI-Chat, Alarm, PDF-Viewer &amp; Download, Prioritäts-Support.</div>
         </div>
 
         <div class="faq-item">

@@ -117,7 +117,7 @@ check('Pricing matches Auktivo Free/Pro model', () => {
     'KI-Chat-Assistent',
     'Alarm-Funktion (Push/E-Mail)',
     'Merkliste &amp; Favoriten',
-    'PDF-Download',
+    'PDF-Viewer',
     'OCR für PDF- &amp; TIF-Gutachten'
   ].forEach((token) => {
     if (pricingHtml.includes(token)) pass(`${token}`);
