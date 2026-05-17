@@ -1,11 +1,7 @@
 name: CI – Tests & Checks
 
 on:
-  push:
-    branches: [ "**" ]        # every branch, every push
-  pull_request:
-    branches: [ "**" ]
-  workflow_dispatch:
+  workflow_dispatch:  # Nur manuell – ersetzt durch unit-tests.yml + validation-checks.yml
 
 permissions:
   contents: read

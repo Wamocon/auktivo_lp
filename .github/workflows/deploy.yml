@@ -3,6 +3,8 @@ name: Deploy Landing Page
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -11,8 +13,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false  # Nie einen laufenden Deploy unterbrechen
 
 jobs:
   # ── 1. Build & upload artifact ──────────────────────────────────

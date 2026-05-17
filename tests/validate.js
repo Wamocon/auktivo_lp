@@ -27,6 +27,8 @@ function readFile(rel) {
 const html = readFile('index.html');
 const js = readFile('script.js');
 const workflow = readFile('.github/workflows/deploy.yml');
+const unitTestsWf = readFile('.github/workflows/unit-tests.yml');
+const validationWf = readFile('.github/workflows/validation-checks.yml');
 const agb = readFile('agb.html');
 const datenschutz = readFile('datenschutz.html');
 const impressum = readFile('impressum.html');
@@ -37,7 +39,9 @@ check('Required files exist', () => {
     'index.html', 'style.css', 'script.js',
     'favicon.png', 'favicon.svg', '.nojekyll',
     'impressum.html', 'datenschutz.html', 'agb.html',
-    '.github/workflows/deploy.yml'
+    '.github/workflows/deploy.yml',
+    '.github/workflows/unit-tests.yml',
+    '.github/workflows/validation-checks.yml'
   ].forEach((file) => {
     if (fs.existsSync(path.join(ROOT, file))) pass(file);
     else fail(`${file} is missing`);
@@ -113,7 +117,7 @@ check('Pricing matches Auktivo Free/Pro model', () => {
     'KI-Chat-Assistent',
     'Alarm-Funktion (Push/E-Mail)',
     'Merkliste &amp; Favoriten',
-    'PDF-Download',
+    'PDF-Viewer',
     'OCR für PDF- &amp; TIF-Gutachten'
   ].forEach((token) => {
     if (pricingHtml.includes(token)) pass(`${token}`);
@@ -206,6 +210,107 @@ check('script.js core functions are present', () => {
     if (js.includes(fn)) pass(`${fn}()`);
     else fail(`${fn}() missing from script.js`);
   });
+});
+
+check('Showcase uses real app navigation (Dashboard/Suche/Favoriten/Alarme)', () => {
+  ['Dashboard', 'Suche', 'Favoriten', 'Alarme'].forEach((item) => {
+    if (html.includes(`data-de="${item}"`)) pass(`Sidebar nav item "${item}" found`);
+    else fail(`Sidebar nav item "${item}" missing`);
+  });
+
+  if (!html.includes('data-de="Merkliste"') || html.split('data-de="Merkliste"').length <= 2) {
+    pass('Legacy "Merkliste" label removed from showcase nav');
+  } else {
+    fail('Legacy "Merkliste" appears too many times in showcase nav – should use "Favoriten"');
+  }
+});
+
+check('iPhone screen 3 shows Favoriten (not calendar/Risikoanalyse)', () => {
+  if (html.includes('screen-favoriten')) pass('screen-favoriten class present');
+  else fail('screen-favoriten missing – calendar screen should have been replaced');
+
+  if (!html.includes('screen-calendar')) pass('screen-calendar (replaced) absent');
+  else fail('screen-calendar still in HTML – should be replaced by screen-favoriten');
+
+  if (!html.includes('cal-grid') && !html.includes('cal-legend')) {
+    pass('Calendar grid/legend removed (Risikoanalyse screen gone)');
+  } else {
+    fail('Calendar grid or legend still present – Risikoanalyse screen not fully removed');
+  }
+});
+
+check('Footer has no WAMOCON product family / "Pläne" column', () => {
+  const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/i);
+  const footerHtml = footerMatch ? footerMatch[0] : '';
+  if (!footerHtml.includes('data-de="Pl\u00e4ne"') && !footerHtml.includes('>Pl\u00e4ne<')) {
+    pass('Footer "Pläne" column removed');
+  } else {
+    fail('Footer still contains "Pläne" (WAMOCON product family) column');
+  }
+  if (!footerHtml.includes('md:grid-cols-4')) pass('Footer grid updated (not 4-column)');
+  else fail('Footer grid is still md:grid-cols-4 – should be 3 after removing Pläne column');
+});
+
+check('Contact form has complete translations', () => {
+  ['cf-name', 'cf-email', 'cf-message'].forEach((id) => {
+    const labelMatch = html.match(new RegExp(`for="${id}"[^>]*data-de=`));
+    if (labelMatch) pass(`Label for #${id} has translation`);
+    else fail(`Label for #${id} missing data-de translation`);
+  });
+
+  if (html.includes('data-ph-de=') && html.includes('data-ph-en=')) {
+    pass('Placeholder translations (data-ph-de/data-ph-en) present in contact form');
+  } else {
+    fail('Contact form input placeholders missing data-ph-de / data-ph-en');
+  }
+
+  if (html.match(/id="cf-error"[^>]*data-de=/)) pass('#cf-error has translation');
+  else fail('#cf-error missing data-de translation');
+});
+
+check('Legal pages have language toggle and English translations', () => {
+  [
+    ['agb.html', agb, 'Terms'],
+    ['datenschutz.html', datenschutz, 'Privacy Policy'],
+    ['impressum.html', impressum, 'Legal Notice']
+  ].forEach(([name, content, enTitle]) => {
+    if (content.includes('lang-toggle')) pass(`${name} has language toggle`);
+    else fail(`${name} missing language toggle`);
+
+    if (content.includes('data-en=')) pass(`${name} has data-en translations`);
+    else fail(`${name} missing data-en translations`);
+
+    if (content.includes(enTitle)) pass(`${name} contains EN title "${enTitle}"`);
+    else fail(`${name} missing EN title "${enTitle}"`);
+
+    if (content.includes('script.js')) pass(`${name} links script.js`);
+    else fail(`${name} missing <script src="script.js">`);
+
+    if (content.includes('style.css')) pass(`${name} links style.css`);
+    else fail(`${name} missing <link rel="stylesheet" href="style.css">`);
+  });
+});
+
+check('Workflow files have correct triggers and concurrency', () => {
+  // unit-tests.yml
+  if (unitTestsWf.includes('pull_request:')) pass('unit-tests.yml has pull_request trigger');
+  else fail('unit-tests.yml missing pull_request trigger');
+  if (unitTestsWf.includes('cancel-in-progress: true')) pass('unit-tests.yml cancel-in-progress: true');
+  else fail('unit-tests.yml should have cancel-in-progress: true');
+  if (unitTestsWf.includes('node tests/validate.js')) pass('unit-tests.yml runs validate.js');
+  else fail('unit-tests.yml missing validate.js step');
+
+  // validation-checks.yml
+  if (validationWf.includes('pull_request:')) pass('validation-checks.yml has pull_request trigger');
+  else fail('validation-checks.yml missing pull_request trigger');
+  if (validationWf.includes('cancel-in-progress: true')) pass('validation-checks.yml cancel-in-progress: true');
+  else fail('validation-checks.yml should have cancel-in-progress: true');
+  if (validationWf.includes('test:lint')) pass('validation-checks.yml runs htmlhint');
+  else fail('validation-checks.yml missing htmlhint step');
+
+  // deploy.yml PR deduplication
+  if (workflow.includes('cancel-in-progress: false')) pass('deploy.yml cancel-in-progress: false (deploys not interrupted)');
+  else fail('deploy.yml should have cancel-in-progress: false');
 });
 
 console.log('\n' + '═'.repeat(52));
