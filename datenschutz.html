@@ -19,6 +19,7 @@
     body { font-family: var(--font-sans); background: var(--color-bg); color: #0f172a; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="style.css">
   <link rel="canonical" href="https://auktivo.app/de/datenschutz">
 </head>
 
@@ -32,27 +33,33 @@
         </div>
         <span class="text-xl font-bold tracking-tight text-slate-900 font-display">Auktivo</span>
       </a>
-      <a href="index.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-wider">Startseite</a>
+      <div class="flex items-center gap-4">
+        <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Sprache wählen / Choose language">
+          <button id="lang-de" class="lang-btn active" aria-pressed="true">DE</button>
+          <button id="lang-en" class="lang-btn" aria-pressed="false">EN</button>
+        </div>
+        <a href="index.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-wider" data-de="Startseite" data-en="Home">Startseite</a>
+      </div>
     </div>
   </nav>
 
   <main class="pt-32 pb-24">
     <div class="max-w-3xl mx-auto px-6">
-      <h1 class="text-5xl font-black mb-12">Datenschutzerklärung</h1>
+      <h1 class="text-5xl font-black mb-12" data-de="Datenschutzerklärung" data-en="Privacy Policy">Datenschutzerklärung</h1>
       
       <div class="space-y-8 text-slate-600">
         <section class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
-          <h2 class="text-xl font-bold mb-3 text-slate-900">Offizielle Online-Fassung</h2>
-          <p class="text-slate-600 mb-3">Die aktuelle Datenschutzerklärung der Auktivo-App findest du unter der offiziellen App-URL.</p>
+          <h2 class="text-xl font-bold mb-3 text-slate-900" data-de="Offizielle Online-Fassung" data-en="Official Online Version">Offizielle Online-Fassung</h2>
+          <p class="text-slate-600 mb-3" data-de="Die aktuelle Datenschutzerklärung der Auktivo-App findest du unter der offiziellen App-URL." data-en="The current Auktivo Privacy Policy can be found at the official app URL.">Die aktuelle Datenschutzerklärung der Auktivo-App findest du unter der offiziellen App-URL.</p>
           <a href="https://auktivo.app/de/datenschutz" target="_blank" rel="noopener" class="font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">https://auktivo.app/de/datenschutz</a>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">1. Verantwortlicher</h2>
-          <p class="mb-4">Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze ist:</p>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="1. Verantwortlicher" data-en="1. Controller">1. Verantwortlicher</h2>
+          <p class="mb-4" data-de="Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze ist:" data-en="The controller within the meaning of the General Data Protection Regulation (GDPR) and other national data protection laws is:">Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze ist:</p>
           <div class="space-y-1 pt-2">
             <p class="font-bold text-slate-900">WAMOCON GmbH</p>
-            <p>Mergenthalerallee 79 – 81, 65760 Eschborn</p>
+            <p>Mergenthalerallee 79 &ndash; 81, 65760 Eschborn</p>
             <p>Telefon: +49 6196 5838311</p>
             <p>E-Mail: info@wamocon.com</p>
             <p>Projektkontakt Auktivo: hello@auktivo.app</p>
@@ -60,30 +67,30 @@
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">2. Überblick über die Datenverarbeitung</h2>
-          <p class="mb-4">Diese Datenschutzerklärung gilt für die Website und Webanwendung Auktivo. Auktivo ist eine digitale Plattform für KI-gestützte Zwangsversteigerungsanalyse.</p>
-          <p>Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Plattform sowie unserer Inhalte und Leistungen erforderlich ist.</p>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="2. Überblick über die Datenverarbeitung" data-en="2. Overview of Data Processing">2. Überblick über die Datenverarbeitung</h2>
+          <p class="mb-4" data-de="Diese Datenschutzerklärung gilt für die Website und Webanwendung Auktivo. Auktivo ist eine digitale Plattform für KI-gestützte Zwangsversteigerungsanalyse." data-en="This Privacy Policy applies to the Auktivo website and web application. Auktivo is a digital platform for AI-powered foreclosure analysis.">Diese Datenschutzerklärung gilt für die Website und Webanwendung Auktivo. Auktivo ist eine digitale Plattform für KI-gestützte Zwangsversteigerungsanalyse.</p>
+          <p data-de="Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Plattform sowie unserer Inhalte und Leistungen erforderlich ist." data-en="We process personal data of our users only to the extent necessary to provide a functional platform and our content and services.">Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Plattform sowie unserer Inhalte und Leistungen erforderlich ist.</p>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">3. Hosting und Infrastruktur</h2>
-          <p class="mb-4">Unsere Plattform wird über moderne Cloud-Infrastruktur bereitgestellt. Wir nutzen folgende Dienste:</p>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="3. Hosting und Infrastruktur" data-en="3. Hosting and Infrastructure">3. Hosting und Infrastruktur</h2>
+          <p class="mb-4" data-de="Unsere Plattform wird über moderne Cloud-Infrastruktur bereitgestellt. Wir nutzen folgende Dienste:" data-en="Our platform is hosted via modern cloud infrastructure. We use the following services:">Unsere Plattform wird über moderne Cloud-Infrastruktur bereitgestellt. Wir nutzen folgende Dienste:</p>
           <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Vercel Inc.</strong>: Hosting der Website und Webanwendung.</li>
-            <li><strong>Supabase Inc.</strong>: Datenbank, Authentifizierung und Backend-Infrastruktur (EU-Hosting).</li>
-            <li><strong>Stripe Inc.</strong>: Zahlungsabwicklung für Pro-Abonnements.</li>
+            <li><strong>Vercel Inc.</strong><span data-de=": Hosting der Website und Webanwendung." data-en=": Hosting of the website and web application.">: Hosting der Website und Webanwendung.</span></li>
+            <li><strong>Supabase Inc.</strong><span data-de=": Datenbank, Authentifizierung und Backend-Infrastruktur (EU-Hosting)." data-en=": Database, authentication and backend infrastructure (EU hosting).">: Datenbank, Authentifizierung und Backend-Infrastruktur (EU-Hosting).</span></li>
+            <li><strong>Stripe Inc.</strong><span data-de=": Zahlungsabwicklung für Pro-Abonnements." data-en=": Payment processing for Pro subscriptions.">: Zahlungsabwicklung für Pro-Abonnements.</span></li>
           </ul>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">4. KI-Analyse &amp; OCR-Pipeline</h2>
-          <p class="mb-4">Auktivo bietet die Funktion, öffentlich verfügbare Zwangsversteigerungsgutachten aus dem staatlichen ZVG-Portal per OCR-Pipeline zu verarbeiten und mittels KI zu analysieren. Dabei werden ausschließlich öffentlich zugängliche Dokumente der Amtsgerichte verarbeitet. Es werden keine personenbezogenen Daten aus diesen Dokumenten gespeichert, die über die in der App angezeigten Suchergebnisse hinausgehen.</p>
-          <p>Der KI-Chat-Assistent verarbeitet nur die Inhalte des jeweiligen Gutachtens und nicht-personenbezogene Nutzereingaben (Fragen zum Objekt). Es erfolgt keine Speicherung der Chatverläufe außer zur Darstellung in der aktuellen Sitzung.</p>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="4. KI-Analyse &amp; OCR-Pipeline" data-en="4. AI Analysis &amp; OCR Pipeline">4. KI-Analyse &amp; OCR-Pipeline</h2>
+          <p class="mb-4" data-de="Auktivo bietet die Funktion, öffentlich verfügbare Zwangsversteigerungsgutachten aus dem staatlichen ZVG-Portal per OCR-Pipeline zu verarbeiten und mittels KI zu analysieren. Dabei werden ausschließlich öffentlich zugängliche Dokumente der Amtsgerichte verarbeitet. Es werden keine personenbezogenen Daten aus diesen Dokumenten gespeichert, die über die in der App angezeigten Suchergebnisse hinausgehen." data-en="Auktivo offers the function of processing publicly available foreclosure appraisals from the official ZVG court portal via an OCR pipeline and analysing them using AI. Only publicly accessible documents of the district courts are processed. No personal data from these documents is stored beyond what is displayed in the search results.">Auktivo bietet die Funktion, öffentlich verfügbare Zwangsversteigerungsgutachten aus dem staatlichen ZVG-Portal per OCR-Pipeline zu verarbeiten und mittels KI zu analysieren. Dabei werden ausschließlich öffentlich zugängliche Dokumente der Amtsgerichte verarbeitet. Es werden keine personenbezogenen Daten aus diesen Dokumenten gespeichert, die über die in der App angezeigten Suchergebnisse hinausgehen.</p>
+          <p data-de="Der KI-Chat-Assistent verarbeitet nur die Inhalte des jeweiligen Gutachtens und nicht-personenbezogene Nutzereingaben (Fragen zum Objekt). Es erfolgt keine Speicherung der Chatverläufe außer zur Darstellung in der aktuellen Sitzung." data-en="The AI chat assistant processes only the contents of the relevant appraisal and non-personal user inputs (questions about the property). Chat histories are not stored beyond the current session.">Der KI-Chat-Assistent verarbeitet nur die Inhalte des jeweiligen Gutachtens und nicht-personenbezogene Nutzereingaben (Fragen zum Objekt). Es erfolgt keine Speicherung der Chatverläufe außer zur Darstellung in der aktuellen Sitzung.</p>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">5. Ihre Rechte</h2>
-          <p>Ihnen stehen die Rechte auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO), Datenübertragbarkeit (Art. 20 DSGVO) und Widerspruch (Art. 21 DSGVO) zu.</p>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="5. Ihre Rechte" data-en="5. Your Rights">5. Ihre Rechte</h2>
+          <p data-de="Ihnen stehen die Rechte auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO), Datenübertragbarkeit (Art. 20 DSGVO) und Widerspruch (Art. 21 DSGVO) zu." data-en="You have the right to access (Art. 15 GDPR), rectification (Art. 16 GDPR), erasure (Art. 17 GDPR), restriction of processing (Art. 18 GDPR), data portability (Art. 20 GDPR) and objection (Art. 21 GDPR).">Ihnen stehen die Rechte auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO), Datenübertragbarkeit (Art. 20 DSGVO) und Widerspruch (Art. 21 DSGVO) zu.</p>
         </section>
       </div>
     </div>
@@ -112,11 +119,12 @@
         <span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase">Entwickelt in Deutschland</span>
       </div>
 
-      <div class="text-slate-400 text-sm">
+      <div class="text-slate-400 text-sm" data-de="&copy; 2026 Auktivo &mdash; WAMOCON GmbH. Alle Rechte vorbehalten." data-en="&copy; 2026 Auktivo &mdash; WAMOCON GmbH. All rights reserved.">
         &copy; 2026 Auktivo &mdash; WAMOCON GmbH. Alle Rechte vorbehalten.
       </div>
     </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

@@ -27,6 +27,7 @@
     h1 { font-family: var(--font-display); }
   </style>
   <link rel="canonical" href="https://auktivo.app/de/impressum">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="overflow-x-hidden antialiased leading-relaxed">
@@ -40,20 +41,26 @@
         </div>
         <span class="text-xl font-bold tracking-tight text-slate-900 font-display">Auktivo</span>
       </a>
-      <a href="index.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-wider">Startseite</a>
+      <div class="flex items-center gap-4">
+        <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Sprache wählen / Choose language">
+          <button id="lang-de" class="lang-btn active" aria-pressed="true">DE</button>
+          <button id="lang-en" class="lang-btn" aria-pressed="false">EN</button>
+        </div>
+        <a href="index.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-wider" data-de="Startseite" data-en="Home">Startseite</a>
+      </div>
     </div>
   </nav>
 
   <!-- CONTENT -->
   <main class="pt-32 pb-24">
     <div class="max-w-3xl mx-auto px-6">
-      <span class="inline-block text-xs font-bold tracking-widest uppercase text-indigo-600 bg-indigo-50 px-3 py-1 rounded mb-4">Rechtliches</span>
-      <h1 class="text-5xl font-black leading-tight tracking-tight mb-12">Impressum</h1>
+      <span class="inline-block text-xs font-bold tracking-widest uppercase text-indigo-600 bg-indigo-50 px-3 py-1 rounded mb-4" data-de="Rechtliches" data-en="Legal">Rechtliches</span>
+      <h1 class="text-5xl font-black leading-tight tracking-tight mb-12" data-de="Impressum" data-en="Legal Notice">Impressum</h1>
       
       <div class="space-y-8">
         <section class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
-          <h2 class="text-xl font-bold mb-3 text-slate-900">Offizielle Online-Fassung</h2>
-          <p class="text-slate-600 mb-3">Das aktuelle Impressum der Auktivo-App findest du unter der offiziellen App-URL.</p>
+          <h2 class="text-xl font-bold mb-3 text-slate-900" data-de="Offizielle Online-Fassung" data-en="Official Online Version">Offizielle Online-Fassung</h2>
+          <p class="text-slate-600 mb-3" data-de="Das aktuelle Impressum der Auktivo-App findest du unter der offiziellen App-URL." data-en="The current legal notice of the Auktivo app can be found at the official app URL.">Das aktuelle Impressum der Auktivo-App findest du unter der offiziellen App-URL.</p>
           <a href="https://auktivo.app/de/impressum" target="_blank" rel="noopener" class="font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">https://auktivo.app/de/impressum</a>
         </section>
 
@@ -61,44 +68,44 @@
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
           <h2 class="text-xl font-bold mb-4">WAMOCON GmbH</h2>
           <div class="space-y-1 text-slate-500">
-            <p>Mergenthalerallee 79 – 81</p>
+            <p>Mergenthalerallee 79 &ndash; 81</p>
             <p>65760 Eschborn</p>
-            <p>Deutschland</p>
+            <p data-de="Deutschland" data-en="Germany">Deutschland</p>
           </div>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4">Kontakt</h2>
+          <h2 class="text-xl font-bold mb-4" data-de="Kontakt" data-en="Contact">Kontakt</h2>
           <div class="space-y-2 text-slate-500">
             <p>
-              Telefon: <a class="font-medium text-indigo-600 hover:underline" href="tel:+4961965838311">+49 6196 5838311</a>
+              <span data-de="Telefon:" data-en="Phone:">Telefon:</span> <a class="font-medium text-indigo-600 hover:underline" href="tel:+4961965838311">+49 6196 5838311</a>
             </p>
             <p>
               E-Mail: <a class="font-medium text-indigo-600 hover:underline" href="mailto:info@wamocon.com">info@wamocon.com</a>
             </p>
             <p>
-              Projektkontakt Auktivo: <a class="font-medium text-indigo-600 hover:underline" href="mailto:hello@auktivo.app">hello@auktivo.app</a>
+              <span data-de="Projektkontakt Auktivo:" data-en="Auktivo project contact:">Projektkontakt Auktivo:</span> <a class="font-medium text-indigo-600 hover:underline" href="mailto:hello@auktivo.app">hello@auktivo.app</a>
             </p>
           </div>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4">Vertretungsberechtigter Geschäftsführer</h2>
+          <h2 class="text-xl font-bold mb-4" data-de="Vertretungsberechtigter Geschäftsführer" data-en="Authorised Managing Director">Vertretungsberechtigter Geschäftsführer</h2>
           <p class="text-slate-500">Dipl.-Ing. Waleri Moretz</p>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4">Registereintrag</h2>
+          <h2 class="text-xl font-bold mb-4" data-de="Registereintrag" data-en="Company Registration">Registereintrag</h2>
           <div class="space-y-2 text-slate-500">
-            <p>Sitz der Gesellschaft: Eschborn</p>
-            <p>Handelsregister: Eschborn HRB 123666</p>
-            <p>Umsatzsteuer-Identifikationsnummer: DE344930486</p>
+            <p data-de="Sitz der Gesellschaft: Eschborn" data-en="Registered office: Eschborn">Sitz der Gesellschaft: Eschborn</p>
+            <p data-de="Handelsregister: Eschborn HRB 123666" data-en="Commercial register: Eschborn HRB 123666">Handelsregister: Eschborn HRB 123666</p>
+            <p data-de="Umsatzsteuer-Identifikationsnummer: DE344930486" data-en="VAT identification number: DE344930486">Umsatzsteuer-Identifikationsnummer: DE344930486</p>
           </div>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4">Angaben zum Angebot</h2>
-          <p class="text-slate-500">
+          <h2 class="text-xl font-bold mb-4" data-de="Angaben zum Angebot" data-en="About the Service">Angaben zum Angebot</h2>
+          <p class="text-slate-500" data-de="Auktivo ist eine webbasierte Software-as-a-Service-Plattform für KI-gestützte Zwangsversteigerungsanalyse. Das Angebot richtet sich an Privatpersonen und Einsteiger-Investoren, die Zwangsversteigerungsgutachten des staatlichen ZVG-Portals schnell und verständlich analysieren möchten." data-en="Auktivo is a web-based Software-as-a-Service platform for AI-powered foreclosure analysis. The service is aimed at private individuals and beginner investors who wish to analyse foreclosure appraisals from the official ZVG court portal quickly and clearly.">
             Auktivo ist eine webbasierte Software-as-a-Service-Plattform für KI-gestützte Zwangsversteigerungsanalyse. Das Angebot richtet sich an Privatpersonen und Einsteiger-Investoren, die Zwangsversteigerungsgutachten des staatlichen ZVG-Portals schnell und verständlich analysieren möchten.
           </p>
         </section>
@@ -129,11 +136,12 @@
         <span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase">Entwickelt in Deutschland</span>
       </div>
 
-      <div class="text-slate-400 text-sm">
+      <div class="text-slate-400 text-sm" data-de="&copy; 2026 Auktivo &mdash; WAMOCON GmbH. Alle Rechte vorbehalten." data-en="&copy; 2026 Auktivo &mdash; WAMOCON GmbH. All rights reserved.">
         &copy; 2026 Auktivo &mdash; WAMOCON GmbH. Alle Rechte vorbehalten.
       </div>
     </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

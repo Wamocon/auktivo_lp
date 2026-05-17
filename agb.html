@@ -19,6 +19,7 @@
     body { font-family: var(--font-sans); background: var(--color-bg); color: #0f172a; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="style.css">
   <link rel="canonical" href="https://auktivo.app/de/agb">
 </head>
 
@@ -32,29 +33,35 @@
         </div>
         <span class="text-xl font-bold tracking-tight text-slate-900 font-display">Auktivo</span>
       </a>
-      <a href="index.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-wider">Startseite</a>
+      <div class="flex items-center gap-4">
+        <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Sprache wählen / Choose language">
+          <button id="lang-de" class="lang-btn active" aria-pressed="true">DE</button>
+          <button id="lang-en" class="lang-btn" aria-pressed="false">EN</button>
+        </div>
+        <a href="index.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-wider" data-de="Startseite" data-en="Home">Startseite</a>
+      </div>
     </div>
   </nav>
 
   <main class="pt-32 pb-24">
     <div class="max-w-3xl mx-auto px-6">
-      <h1 class="text-5xl font-black mb-12 uppercase tracking-tighter">AGB</h1>
+      <h1 class="text-5xl font-black mb-12 uppercase tracking-tighter" data-de="AGB" data-en="Terms &amp; Conditions">AGB</h1>
       
       <div class="space-y-8 text-slate-600">
         <section class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
-          <h2 class="text-xl font-bold mb-3 text-slate-900">Offizielle Online-Fassung</h2>
-          <p class="text-slate-600 mb-3">Die aktuelle Fassung der Auktivo-AGB findest du unter der offiziellen App-URL.</p>
+          <h2 class="text-xl font-bold mb-3 text-slate-900" data-de="Offizielle Online-Fassung" data-en="Official Online Version">Offizielle Online-Fassung</h2>
+          <p class="text-slate-600 mb-3" data-de="Die aktuelle Fassung der Auktivo-AGB findest du unter der offiziellen App-URL." data-en="The current Auktivo Terms &amp; Conditions can be found at the official app URL.">Die aktuelle Fassung der Auktivo-AGB findest du unter der offiziellen App-URL.</p>
           <a href="https://auktivo.app/de/agb" target="_blank" rel="noopener" class="font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">https://auktivo.app/de/agb</a>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">§ 1 Geltungsbereich</h2>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="§ 1 Geltungsbereich" data-en="§ 1 Scope">§ 1 Geltungsbereich</h2>
           <p class="mb-4">(1) Diese Allgemeinen Geschäftsbedingungen (nachfolgend „AGB") der WAMOCON GmbH (nachfolgend „Anbieter"), gelten für alle Verträge über die Nutzung der Software-as-a-Service-Plattform Auktivo (nachfolgend „Plattform").</p>
           <p>(2) Die Plattform richtet sich an Privatpersonen und Einsteiger-Investoren, die Informationen zu Zwangsversteigerungsverfahren analysieren möchten. Soweit Verbraucher im Sinne des § 13 BGB Nutzer der Plattform sind, gelten die gesetzlichen Regelungen zum Verbraucherschutz.</p>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">§ 2 Leistungsbeschreibung</h2>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="§ 2 Leistungsbeschreibung" data-en="§ 2 Service Description">§ 2 Leistungsbeschreibung</h2>
           <p class="mb-4">Auktivo ist eine digitale Lösung für KI-gestützte Zwangsversteigerungsanalyse. Die Leistungen umfassen:</p>
           <ul class="list-disc pl-5 space-y-2">
             <li>Täglicher Import von Zwangsversteigerungsterminen aus dem staatlichen ZVG-Portal.</li>
@@ -66,17 +73,17 @@
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">§ 3 Pflichten der Nutzer</h2>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="§ 3 Pflichten der Nutzer" data-en="§ 3 User Obligations">§ 3 Pflichten der Nutzer</h2>
           <p class="mb-4">Nutzer sind verpflichtet, ihre Zugangsdaten geheim zu halten und die Plattform ausschließlich für zulässige Zwecke zu nutzen. Die über Auktivo bereitgestellten KI-Analysen und Chat-Antworten dienen ausschließlich der Orientierung. Sie ersetzen keine rechtliche, steuerliche oder bautechnische Fachberatung.</p>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">§ 4 Gewährleistung & Haftung</h2>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="§ 4 Gewährleistung &amp; Haftung" data-en="§ 4 Warranty &amp; Liability">§ 4 Gewährleistung &amp; Haftung</h2>
           <p class="mb-4">Der Anbieter übernimmt keine Haftung für die inhaltliche Richtigkeit der durch die KI extrahierten Informationen oder daraus resultierende Investitionsentscheidungen. Die KI-Analysen und Chat-Antworten ersetzen keine rechtliche, steuerliche oder bautechnische Fachberatung. Die Haftung für leichte Fahrlässigkeit ist auf vertragstypische, vorhersehbare Schäden begrenzt.</p>
         </section>
 
         <section class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <h2 class="text-xl font-bold mb-4 text-slate-900">§ 5 Schlussbestimmungen</h2>
+          <h2 class="text-xl font-bold mb-4 text-slate-900" data-de="§ 5 Schlussbestimmungen" data-en="§ 5 Final Provisions">§ 5 Schlussbestimmungen</h2>
           <p class="mb-4">Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand für alle Streitigkeiten aus diesem Vertrag ist Frankfurt am Main, sofern der Auftraggeber Kaufmann ist.</p>
         </section>
       </div>
@@ -106,11 +113,12 @@
         <span class="text-[11px] font-bold tracking-widest text-slate-400 uppercase">Entwickelt in Deutschland</span>
       </div>
 
-      <div class="text-slate-400 text-sm">
+      <div class="text-slate-400 text-sm" data-de="&copy; 2026 Auktivo &mdash; WAMOCON GmbH. Alle Rechte vorbehalten." data-en="&copy; 2026 Auktivo &mdash; WAMOCON GmbH. All rights reserved.">
         &copy; 2026 Auktivo &mdash; WAMOCON GmbH. Alle Rechte vorbehalten.
       </div>
     </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

@@ -181,7 +181,7 @@
                       <div class="kpi-value kpi-blue">5</div>
                     </div>
                     <div class="kpi-card">
-                      <div class="kpi-label">Merkliste</div>
+                      <div class="kpi-label">Favoriten</div>
                       <div class="kpi-value" style="color:#fff;">3</div>
                     </div>
                   </div>
@@ -238,30 +238,52 @@
                   <div class="wizard-btn"><span class="wizard-btn-text">Suchen →</span></div>
                 </div>
 
-                <!-- Screen 3: Risikoanalyse -->
-                <div class="app-screen screen-calendar">
-                  <div class="cal-header">
-                    <span class="cal-title">Risikoanalyse</span>
-                    <span class="cal-month">Bayern 2026</span>
+                <!-- Screen 3: Favoriten (Pro-Feature aus der echten App) -->
+                <div class="app-screen screen-favoriten">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="screen-logo">auktivo</span>
+                    <div class="screen-avatar"></div>
                   </div>
-                  <div class="cal-grid">
-                    <div class="cal-day-label">Mo</div><div class="cal-day-label">Di</div><div class="cal-day-label">Mi</div>
-                    <div class="cal-day-label">Do</div><div class="cal-day-label">Fr</div><div class="cal-day-label">Sa</div><div class="cal-day-label">So</div>
-                    <div class="cal-day empty">30</div><div class="cal-day">1</div><div class="cal-day">2</div>
-                    <div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day ev-amber">5</div><div class="cal-day ev-amber">6</div>
-                    <div class="cal-day ev-blue">7</div><div class="cal-day ev-blue">8</div><div class="cal-day ev-blue">9</div>
-                    <div class="cal-day ev-blue">10</div><div class="cal-day ev-blue">11</div><div class="cal-day">12</div><div class="cal-day">13</div>
-                    <div class="cal-day">14</div><div class="cal-day today-d">15</div><div class="cal-day ev-green">16</div>
-                    <div class="cal-day ev-green">17</div><div class="cal-day ev-green">18</div><div class="cal-day">19</div><div class="cal-day">20</div>
-                    <div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
-                    <div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div>
-                    <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
-                    <div class="cal-day empty">1</div><div class="cal-day empty">2</div><div class="cal-day empty">3</div><div class="cal-day empty">4</div>
+                  <div style="font-size:10px;font-weight:800;color:#fff;font-family:'Outfit',sans-serif;margin-bottom:3px;">Favoriten</div>
+                  <div style="font-size:6px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;">3 gespeicherte Objekte</div>
+                  <div class="request-list-item" style="flex-direction:column;align-items:flex-start;gap:3px;padding:7px 9px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+                      <div style="font-size:8px;font-weight:700;color:#fff;">EFH &middot; München</div>
+                      <span class="req-badge badge-amber">Mittel</span>
+                    </div>
+                    <div style="font-size:6px;color:rgba(255,255,255,0.4);">320.000 &euro; &middot; 14.07.2026</div>
                   </div>
-                  <div class="cal-legend">
-                    <div class="legend-item"><div class="leg-dot" style="background:#818cf8;"></div>Analysiert</div>
-                    <div class="legend-item"><div class="leg-dot" style="background:#f59e0b;"></div>Neu heute</div>
-                    <div class="legend-item"><div class="leg-dot" style="background:#ef4444;"></div>Hohes Risiko</div>
+                  <div class="request-list-item" style="flex-direction:column;align-items:flex-start;gap:3px;padding:7px 9px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+                      <div style="font-size:8px;font-weight:700;color:#fff;">ETW &middot; Hamburg</div>
+                      <span class="req-badge badge-green">Niedrig</span>
+                    </div>
+                    <div style="font-size:6px;color:rgba(255,255,255,0.4);">185.000 &euro; &middot; 18.07.2026</div>
+                  </div>
+                  <div class="request-list-item" style="flex-direction:column;align-items:flex-start;gap:3px;padding:7px 9px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+                      <div style="font-size:8px;font-weight:700;color:#fff;">MFH &middot; Berlin</div>
+                      <span class="req-badge" style="background:rgba(239,68,68,0.15);color:#f87171;">Hoch</span>
+                    </div>
+                    <div style="font-size:6px;color:rgba(255,255,255,0.4);">650.000 &euro; &middot; 22.07.2026</div>
+                  </div>
+                  <div style="margin-top:auto;display:flex;justify-content:space-around;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.35;">
+                      <svg width="10" height="10" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg>
+                      <span style="font-size:5px;color:rgba(255,255,255,.4);">Suche</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                      <svg width="10" height="10" fill="none" stroke="#818cf8" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span style="font-size:5px;color:#818cf8;font-weight:700;">Favoriten</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.35;">
+                      <svg width="10" height="10" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                      <span style="font-size:5px;color:rgba(255,255,255,.4);">Alarme</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.35;">
+                      <svg width="10" height="10" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>
+                      <span style="font-size:5px;color:rgba(255,255,255,.4);">Profil</span>
+                    </div>
                   </div>
                 </div>
 
@@ -550,10 +572,10 @@
 
       <!-- Tab buttons -->
       <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-6 justify-center reveal">
-        <button class="tab-btn active" data-tab="dashboard" data-de="Suche" data-en="Search">Suche</button>
+        <button class="tab-btn active" data-tab="dashboard" data-de="Dashboard" data-en="Dashboard">Dashboard</button>
         <button class="tab-btn" data-tab="requests" data-de="Objekt-Detail" data-en="Property detail">Objekt-Detail</button>
         <button class="tab-btn" data-tab="calendar" data-de="KI-Chat" data-en="AI chat">KI-Chat</button>
-        <button class="tab-btn" data-tab="admin" data-de="Merkliste" data-en="Favourites">Merkliste</button>
+        <button class="tab-btn" data-tab="admin" data-de="Favoriten" data-en="Favourites">Favoriten</button>
       </div>
 
       <div class="reveal">
@@ -564,7 +586,7 @@
               <div class="win-dot win-dot-red"></div>
               <div class="win-dot win-dot-yellow"></div>
               <div class="win-dot win-dot-green"></div>
-              <div class="win-url">auktivo.vercel.app/de/suche</div>
+              <div class="win-url">auktivo.vercel.app/de/dashboard</div>
             </div>
             <div class="app-window-body">
               <div class="app-sidebar">
@@ -574,14 +596,14 @@
                   </div>
                   <span class="sidebar-logo-text">auktivo</span>
                 </div>
-                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="Suche" data-en="Search">Suche</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="Dashboard" data-en="Dashboard">Dashboard</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Favoriten" data-en="Favourites">Favoriten</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Alarme" data-en="Alerts">Alarme</span></div>
                 <div style="margin-top:auto; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06);">
-                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Alarm" data-en="Alerts">Alarm</span></div>
-                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Pro-Account" data-en="Pro Account">Pro-Account</span></div>
-                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Hilfe" data-en="Help">Hilfe</span></div>
+                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Empfehlungen" data-en="Recommendations">Empfehlungen</span></div>
+                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Profil" data-en="Profile">Profil</span></div>
+                  <div class="sidebar-nav-item" style="font-size:10px;opacity:.6;"><div class="nav-dot"></div><span data-de="Upgrade" data-en="Upgrade">Upgrade</span></div>
                 </div>
               </div>
               <div class="app-content">
@@ -596,7 +618,7 @@
                     <div style="font-size:22px;font-weight:800;color:#10b981;font-family:'Outfit',sans-serif;">8</div>
                   </div>
                   <div class="glass-card-dark rounded-xl p-3">
-                    <div style="font-size:9px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;" data-de="Merkliste" data-en="Favourites">Merkliste</div>
+                    <div style="font-size:9px;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;" data-de="Favoriten" data-en="Favourites">Favoriten</div>
                     <div style="font-size:22px;font-weight:800;color:#818cf8;font-family:'Outfit',sans-serif;">3</div>
                   </div>
                 </div>
@@ -645,10 +667,11 @@
                   <div class="sidebar-logo-icon"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
                   <span class="sidebar-logo-text">auktivo</span>
                 </div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
-                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Dashboard" data-en="Dashboard">Dashboard</span></div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Favoriten" data-en="Favourites">Favoriten</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Alarme" data-en="Alerts">Alarme</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Empfehlungen" data-en="Recommendations">Empfehlungen</span></div>
               </div>
               <div class="app-content">
                 <div class="content-title" data-de="Objekt-Detail" data-en="Property Detail">Objekt-Detail</div>
@@ -694,10 +717,11 @@
                   <div class="sidebar-logo-icon"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
                   <span class="sidebar-logo-text">auktivo</span>
                 </div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
-                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Dashboard" data-en="Dashboard">Dashboard</span></div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="Suche" data-en="Search">Suche</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Favoriten" data-en="Favourites">Favoriten</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Alarme" data-en="Alerts">Alarme</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Empfehlungen" data-en="Recommendations">Empfehlungen</span></div>
               </div>
               <div class="app-content">
                 <div class="content-title" data-de="KI-Chat-Assistent" data-en="AI Chat Assistant">KI-Chat-Assistent</div>
@@ -731,7 +755,7 @@
           <div class="app-window">
             <div class="app-window-bar">
               <div class="win-dot win-dot-red"></div><div class="win-dot win-dot-yellow"></div><div class="win-dot win-dot-green"></div>
-              <div class="win-url">auktivo.vercel.app/de/merkliste</div>
+              <div class="win-url">auktivo.vercel.app/de/favoriten</div>
             </div>
             <div class="app-window-body">
               <div class="app-sidebar">
@@ -739,15 +763,15 @@
                   <div class="sidebar-logo-icon"><svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
                   <span class="sidebar-logo-text">auktivo</span>
                 </div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Dashboard" data-en="Dashboard">Dashboard</span></div>
                 <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Suche" data-en="Search">Suche</span></div>
-                <div class="sidebar-nav-item active" style="color:#f59e0b;background:rgba(245,158,11,0.1);"><div class="nav-dot" style="background:#f59e0b;"></div><span data-de="Merkliste" data-en="Favourites">Merkliste</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="KI-Analyse" data-en="AI Analysis">KI-Analyse</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Einstellungen" data-en="Settings">Einstellungen</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Alarm" data-en="Alerts">Alarm</span></div>
-                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Pro-Account" data-en="Pro Account">Pro-Account</span></div>
+                <div class="sidebar-nav-item active"><div class="nav-dot active"></div><span data-de="Favoriten" data-en="Favourites">Favoriten</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Alarme" data-en="Alerts">Alarme</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Empfehlungen" data-en="Recommendations">Empfehlungen</span></div>
+                <div class="sidebar-nav-item"><div class="nav-dot"></div><span data-de="Profil" data-en="Profile">Profil</span></div>
               </div>
               <div class="app-content">
-               <div class="content-title" data-de="Merkliste" data-en="Favourites">Merkliste</div>
+               <div class="content-title" data-de="Favoriten" data-en="Favourites">Favoriten</div>
                 <div class="flex items-center gap-2 mb-3 flex-wrap">
                  <div style="padding:3px 10px;border-radius:20px;background:rgba(245,158,11,0.15);color:#f59e0b;font-size:9px;font-weight:700;border:1px solid rgba(245,158,11,0.2);" data-de="3 gespeicherte Objekte" data-en="3 saved properties">3 gespeicherte Objekte</div>
                  <div style="padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:9px;font-weight:600;" data-de="+ Alarm einrichten" data-en="+ Set up alert">+ Alarm einrichten</div>
@@ -1050,7 +1074,7 @@
   <!-- ═══ FOOTER ═════════════════════════════════════════════════ -->
   <footer style="background:#04070d;border-top:1px solid rgba(255,255,255,0.06);" class="py-16">
     <div class="max-w-7xl mx-auto px-5">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-10 mb-14">
         <!-- Brand -->
         <div class="col-span-2 md:col-span-1">
           <div class="flex items-center gap-2.5 mb-5">
@@ -1076,25 +1100,6 @@
             <li><a href="#roi" class="text-white/35 hover:text-white transition-colors" data-de="Zeitersparnis" data-en="Time savings">Zeitersparnis</a></li>
             <li><a href="#pricing" class="text-white/35 hover:text-white transition-colors" data-de="Preise" data-en="Pricing">Preise</a></li>
             <li><a href="#faq" class="text-white/35 hover:text-white transition-colors">FAQ</a></li>
-          </ul>
-        </div>
-
-        <!-- Produktfamilie -->
-        <div>
-          <h4 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-5" data-de="Pläne" data-en="Plans">Pläne</h4>
-          <ul class="space-y-3 text-sm">
-            <li class="text-white/55 font-semibold flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>Auktivo App
-              <span class="text-[10px] text-indigo-400/60 font-semibold ml-1" data-de="Web-App" data-en="Web app">Web-App</span>
-            </li>
-            <li class="text-white/35 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-teal-500"></span>Free
-              <span class="text-[10px] text-teal-400/60 font-semibold ml-1" data-de="Suche &amp; Basisdaten" data-en="Search &amp; base data">Suche &amp; Basisdaten</span>
-            </li>
-            <li class="text-white/35 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-blue-500"></span>Pro
-              <span class="text-[10px] text-blue-400/60 font-semibold ml-1" data-de="KI-Analyse &amp; Alarm" data-en="AI analysis &amp; alerts">KI-Analyse &amp; Alarm</span>
-            </li>
           </ul>
         </div>
 
@@ -1152,49 +1157,51 @@
         <form id="contact-form" onsubmit="submitContactForm(event)" novalidate class="space-y-4">
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-name">Name *</label>
+              <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-name" data-de="Name *" data-en="Name *">Name *</label>
               <input id="cf-name" type="text" required autocomplete="name"
                 class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-                placeholder="Max Müller">
+                placeholder="Max Müller" data-ph-de="Max Müller" data-ph-en="John Smith">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-email">E-Mail *</label>
+              <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-email" data-de="E-Mail *" data-en="Email *">E-Mail *</label>
               <input id="cf-email" type="email" required autocomplete="email"
                 class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-                placeholder="max@beispiel.de">
+                placeholder="max@beispiel.de" data-ph-de="max@beispiel.de" data-ph-en="john@example.com">
             </div>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-company">Firma / optional</label>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-company" data-de="Firma / optional" data-en="Company / optional">Firma / optional</label>
             <input id="cf-company" type="text" autocomplete="organization"
               class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
               placeholder="Optional">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-subject">Betreff</label>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-subject" data-de="Betreff" data-en="Subject">Betreff</label>
             <select id="cf-subject"
               class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white">
-              <option value="Free oder Pro">Free oder Pro</option>
-              <option value="Frage zur KI-Analyse">Frage zur KI-Analyse</option>
-              <option value="Alarm-Funktion">Alarm-Funktion</option>
-              <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+              <option value="Free oder Pro" data-de="Free oder Pro" data-en="Free or Pro">Free oder Pro</option>
+              <option value="Frage zur KI-Analyse" data-de="Frage zur KI-Analyse" data-en="Question about AI analysis">Frage zur KI-Analyse</option>
+              <option value="Alarm-Funktion" data-de="Alarm-Funktion" data-en="Alert function">Alarm-Funktion</option>
+              <option value="Allgemeine Anfrage" data-de="Allgemeine Anfrage" data-en="General enquiry">Allgemeine Anfrage</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-message">Nachricht *</label>
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5" for="cf-message" data-de="Nachricht *" data-en="Message *">Nachricht *</label>
             <textarea id="cf-message" required rows="4"
               class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none"
-              placeholder="Ich interessiere mich für Auktivo Pro oder habe eine Frage zu einer Zwangsversteigerung ..."></textarea>
+              placeholder="Ich interessiere mich für Auktivo Pro oder habe eine Frage zu einer Zwangsversteigerung ..."
+              data-ph-de="Ich interessiere mich für Auktivo Pro oder habe eine Frage zu einer Zwangsversteigerung ..."
+              data-ph-en="I am interested in Auktivo Pro or have a question about a foreclosure property ..."></textarea>
           </div>
 
-          <div id="cf-error" class="hidden text-sm text-red-500 font-medium">Bitte Name, E-Mail und Nachricht ausfüllen.</div>
+          <div id="cf-error" class="hidden text-sm text-red-500 font-medium" data-de="Bitte Name, E-Mail und Nachricht ausfüllen." data-en="Please fill in name, email and message.">Bitte Name, E-Mail und Nachricht ausfüllen.</div>
 
-          <button type="submit"
+          <button type="submit" data-de="Anfrage senden" data-en="Send enquiry"
             class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-indigo-100 active:scale-95 flex items-center justify-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             Anfrage senden
           </button>
-          <p class="text-center text-xs text-slate-400">Es öffnet sich dein E-Mail-Programm mit der vorausgefüllten Anfrage.</p>
+          <p class="text-center text-xs text-slate-400" data-de="Es öffnet sich dein E-Mail-Programm mit der vorausgefüllten Anfrage." data-en="Your email client will open with the pre-filled enquiry.">Es öffnet sich dein E-Mail-Programm mit der vorausgefüllten Anfrage.</p>
         </form>
       </div>
     </div>
