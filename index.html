@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de" class="scroll-smooth" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +71,12 @@
           <button id="lang-en" class="lang-btn" aria-label="English">EN</button>
         </div>
 
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="theme-btn hidden md:flex" aria-label="Farbschema wechseln">
+          <svg class="theme-icon-sun w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          <svg class="theme-icon-moon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
         <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="hidden md:inline-flex items-center bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-lg shadow-indigo-900/40 active:scale-95" data-de="Kostenlos testen" data-en="Try for free">Kostenlos testen</a>
 
         <!-- Mobile hamburger -->
@@ -95,6 +101,10 @@
           <button id="lang-de-m" class="lang-btn active-lang" aria-label="Deutsch">DE</button>
           <button id="lang-en-m" class="lang-btn" aria-label="English">EN</button>
         </div>
+        <button id="theme-toggle-btn-m" class="theme-btn mx-4 mb-2" aria-label="Farbschema wechseln">
+          <svg class="theme-icon-sun w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          <svg class="theme-icon-moon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
         <a href="https://auktivo.vercel.app" target="_blank" rel="noopener" class="bg-indigo-600 text-white px-4 py-3 rounded-xl font-semibold text-sm text-center transition-all" data-de="Kostenlos testen" data-en="Try for free">Kostenlos testen</a>
       </div>
     </div>
@@ -308,7 +318,7 @@
   </section>
 
   <!-- ═══ TRUST BAR ═════════════════════════════════════════════ -->
-  <section style="background:#0c1120;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);" class="py-8 overflow-hidden">
+  <section id="trust-bar" style="background:#0c1120;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);" class="py-8 overflow-hidden">
     <div class="max-w-7xl mx-auto px-5 mb-5">
       <p class="text-center text-white/25 text-xs font-semibold uppercase tracking-widest" data-de="Technologie-Stack" data-en="Technology stack">Technologie-Stack</p>
     </div>
@@ -1065,7 +1075,7 @@
   </section>
 
   <!-- ═══ FINAL CTA ══════════════════════════════════════════════ -->
-  <section style="background:#070b14;" class="py-28 relative overflow-hidden">
+  <section id="cta-section" style="background:#070b14;" class="py-28 relative overflow-hidden">
     <div class="orb w-[500px] h-[500px] bg-indigo-700/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
     <div class="max-w-4xl mx-auto px-5 text-center relative z-10 reveal">
       <div class="text-indigo-400 text-xs font-bold uppercase tracking-widest mb-5" data-de="Jetzt loslegen" data-en="Get started">Jetzt loslegen</div>
