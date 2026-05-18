@@ -761,3 +761,228 @@ body {
   .app-sidebar { display: none; }
   .tab-btn { padding: 6px 12px; font-size: 0.75rem; }
 }
+
+/* ── 21. THEME TOGGLE BUTTON ──────────────────────────────────*/
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: rgba(255,255,255,0.7);
+  flex-shrink: 0;
+  padding: 0;
+}
+.theme-btn:hover {
+  background: rgba(255,255,255,0.13);
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+.theme-icon-moon { display: none; }
+
+/* ── 22. DARK THEME (alles dunkel) ───────────────────────────*/
+html[data-theme="dark"] #how,
+html[data-theme="dark"] #features,
+html[data-theme="dark"] #extras,
+html[data-theme="dark"] #pricing,
+html[data-theme="dark"] #faq {
+  background: #0c1120 !important;
+}
+html[data-theme="dark"] .glass-card {
+  background: rgba(255,255,255,0.05) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
+}
+html[data-theme="dark"] .glass-card:hover {
+  background: rgba(99,102,241,0.07) !important;
+  border-color: rgba(99,102,241,0.25) !important;
+}
+html[data-theme="dark"] .bento-card {
+  background: #111827 !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+html[data-theme="dark"] .bento-card:hover {
+  border-color: rgba(99,102,241,0.25) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3) !important;
+}
+html[data-theme="dark"] .pricing-card {
+  background: #111827 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html[data-theme="dark"] .pricing-card.featured {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 1px #6366f1, 0 20px 60px rgba(99,102,241,0.18) !important;
+}
+html[data-theme="dark"] .faq-item {
+  background: #111827 !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+html[data-theme="dark"] .faq-item.open { border-color: rgba(99,102,241,0.2) !important; }
+html[data-theme="dark"] .faq-question { color: #f8fafc !important; }
+html[data-theme="dark"] .faq-chevron  { color: #64748b !important; }
+html[data-theme="dark"] .faq-answer   { color: rgba(248,250,252,0.6) !important; }
+html[data-theme="dark"] .pf-row {
+  color: rgba(248,250,252,0.55) !important;
+  border-bottom-color: rgba(255,255,255,0.05) !important;
+}
+html[data-theme="dark"] #how h2,
+html[data-theme="dark"] #how h3,
+html[data-theme="dark"] #features h2,
+html[data-theme="dark"] #features h3,
+html[data-theme="dark"] #extras h2,
+html[data-theme="dark"] #pricing h2,
+html[data-theme="dark"] #pricing h3,
+html[data-theme="dark"] #faq h2 { color: #f8fafc !important; }
+html[data-theme="dark"] #how p,
+html[data-theme="dark"] #features p,
+html[data-theme="dark"] #extras p,
+html[data-theme="dark"] #pricing p { color: rgba(248,250,252,0.55) !important; }
+html[data-theme="dark"] #how .bg-indigo-100 { background: rgba(99,102,241,0.15) !important; }
+html[data-theme="dark"] #how .text-indigo-700 { color: #818cf8 !important; }
+html[data-theme="dark"] #how .bg-violet-100 { background: rgba(139,92,246,0.15) !important; }
+html[data-theme="dark"] #how .text-violet-700 { color: #a78bfa !important; }
+html[data-theme="dark"] #how .bg-emerald-100 { background: rgba(16,185,129,0.15) !important; }
+html[data-theme="dark"] #how .text-emerald-700 { color: #34d399 !important; }
+html[data-theme="dark"] .section-chip {
+  background: rgba(99,102,241,0.12) !important;
+  border-color: rgba(99,102,241,0.2) !important;
+}
+html[data-theme="dark"] #features .bg-slate-50,
+html[data-theme="dark"] #extras .bg-slate-50 {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+html[data-theme="dark"] #features .bg-white,
+html[data-theme="dark"] #features .bg-amber-50 {
+  background: rgba(255,255,255,0.05) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html[data-theme="dark"] #features .text-slate-400,
+html[data-theme="dark"] #extras .text-slate-400 { color: rgba(248,250,252,0.35) !important; }
+html[data-theme="dark"] #features .text-slate-500,
+html[data-theme="dark"] #extras .text-slate-500 { color: rgba(248,250,252,0.5) !important; }
+html[data-theme="dark"] #features .text-slate-600,
+html[data-theme="dark"] #features .text-slate-700,
+html[data-theme="dark"] #extras .text-slate-600 { color: rgba(248,250,252,0.6) !important; }
+html[data-theme="dark"] #features .text-slate-800 { color: rgba(248,250,252,0.8) !important; }
+html[data-theme="dark"] #features .text-slate-900,
+html[data-theme="dark"] #extras .text-slate-900 { color: #f8fafc !important; }
+html[data-theme="dark"] #features .border-slate-100,
+html[data-theme="dark"] #features .border-slate-200 { border-color: rgba(255,255,255,0.08) !important; }
+html[data-theme="dark"] #features .border-amber-200 { border-color: rgba(245,158,11,0.2) !important; }
+html[data-theme="dark"] #pricing .text-slate-400,
+html[data-theme="dark"] #pricing .text-slate-500 { color: rgba(248,250,252,0.45) !important; }
+html[data-theme="dark"] #pricing .text-slate-600 { color: rgba(248,250,252,0.6) !important; }
+html[data-theme="dark"] #pricing .text-slate-900 { color: #f8fafc !important; }
+
+/* ── 23. LIGHT THEME (alles hell) ────────────────────────────*/
+html[data-theme="light"] body { background: #f8fafc !important; }
+
+/* Navbar → hell */
+html[data-theme="light"] #nav {
+  background: rgba(248,250,252,0.92) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+html[data-theme="light"] #nav.nav-scrolled {
+  background: rgba(248,250,252,0.96) !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.05) !important;
+}
+html[data-theme="light"] #nav nav {
+  background: rgba(0,0,0,0.05) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html[data-theme="light"] #nav nav a { color: rgba(15,23,42,0.55) !important; }
+html[data-theme="light"] #nav nav a:hover { color: #0f172a !important; background: rgba(0,0,0,0.05) !important; }
+html[data-theme="light"] #nav .font-display { color: #0f172a !important; }
+html[data-theme="light"] #mobile-nav {
+  background: rgba(248,250,252,0.98) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html[data-theme="light"] #mobile-nav a { color: rgba(15,23,42,0.6) !important; }
+html[data-theme="light"] #mobile-nav hr { border-color: rgba(0,0,0,0.08) !important; }
+html[data-theme="light"] .lang-toggle {
+  background: rgba(0,0,0,0.06) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+html[data-theme="light"] .lang-btn { color: rgba(15,23,42,0.45) !important; }
+html[data-theme="light"] .lang-btn.active-lang {
+  background: rgba(0,0,0,0.1) !important;
+  color: #0f172a !important;
+}
+html[data-theme="light"] #mobile-menu-btn span { background: rgba(15,23,42,0.65) !important; }
+html[data-theme="light"] .theme-btn {
+  border-color: rgba(0,0,0,0.15) !important;
+  background: rgba(0,0,0,0.05) !important;
+  color: #475569 !important;
+}
+html[data-theme="light"] .theme-btn:hover {
+  background: rgba(0,0,0,0.1) !important;
+  color: #0f172a !important;
+}
+html[data-theme="light"] .theme-icon-sun  { display: none; }
+html[data-theme="light"] .theme-icon-moon { display: block; }
+
+/* Hero → hell */
+html[data-theme="light"] #hero { background: #eef2ff !important; }
+html[data-theme="light"] #hero .orb { display: none !important; }
+html[data-theme="light"] #hero .text-white { color: #0f172a !important; }
+html[data-theme="light"] #hero [class*="text-white/"] { color: rgba(15,23,42,0.6) !important; }
+html[data-theme="light"] #hero .text-indigo-300 { color: #4f46e5 !important; }
+html[data-theme="light"] #hero [class*="border-white/"] { border-color: rgba(15,23,42,0.18) !important; }
+html[data-theme="light"] #hero [class*="bg-white/"] { background: rgba(0,0,0,0.05) !important; }
+
+/* Trust bar → hell */
+html[data-theme="light"] #trust-bar {
+  background: #e8edf5 !important;
+  border-top-color: rgba(0,0,0,0.06) !important;
+  border-bottom-color: rgba(0,0,0,0.06) !important;
+}
+html[data-theme="light"] #trust-bar .trust-logo { color: rgba(15,23,42,0.55) !important; }
+html[data-theme="light"] #trust-bar [class*="text-white"] { color: rgba(15,23,42,0.45) !important; }
+
+/* Showcase → hell */
+html[data-theme="light"] #showcase { background: #e8edf5 !important; }
+html[data-theme="light"] #showcase .text-white { color: #0f172a !important; }
+html[data-theme="light"] #showcase [class*="text-white/"] { color: rgba(15,23,42,0.55) !important; }
+html[data-theme="light"] .tab-btn { color: rgba(15,23,42,0.45) !important; }
+html[data-theme="light"] .tab-btn.active {
+  background: rgba(0,0,0,0.08) !important;
+  color: #0f172a !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08) !important;
+}
+
+/* ROI → hell */
+html[data-theme="light"] #roi { background: #eef2ff !important; }
+html[data-theme="light"] #roi .orb { display: none !important; }
+html[data-theme="light"] #roi .text-white { color: #0f172a !important; }
+html[data-theme="light"] #roi [class*="text-white/"] { color: rgba(15,23,42,0.55) !important; }
+html[data-theme="light"] #roi .text-indigo-400 { color: #4f46e5 !important; }
+html[data-theme="light"] #roi .glass-card-dark {
+  background: rgba(255,255,255,0.85) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html[data-theme="light"] #roi .glass-card-dark * { color: #0f172a !important; }
+
+/* CTA → hell */
+html[data-theme="light"] #cta-section { background: #eef2ff !important; }
+html[data-theme="light"] #cta-section .orb { display: none !important; }
+html[data-theme="light"] #cta-section .text-white { color: #0f172a !important; }
+html[data-theme="light"] #cta-section [class*="text-white/"] { color: rgba(15,23,42,0.55) !important; }
+html[data-theme="light"] #cta-section .text-indigo-400 { color: #4f46e5 !important; }
+html[data-theme="light"] #cta-section [class*="border-white/"] { border-color: rgba(15,23,42,0.2) !important; }
+
+/* Footer → hell */
+html[data-theme="light"] footer {
+  background: #e8edf5 !important;
+  border-top-color: rgba(0,0,0,0.06) !important;
+}
+html[data-theme="light"] footer .text-white { color: #0f172a !important; }
+html[data-theme="light"] footer [class*="text-white/"] { color: rgba(15,23,42,0.55) !important; }
+html[data-theme="light"] footer [class*="border-white/"] { border-color: rgba(0,0,0,0.06) !important; }
+html[data-theme="light"] footer a:hover { color: #0f172a !important; }

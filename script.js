@@ -230,6 +230,36 @@
     });
   }
 
+  /* ── 10. THEME TOGGLE (HELL / DUNKEL) ────────────────────────── */
+  function initThemeToggle() {
+    var htmlEl = document.documentElement;
+    var btn    = $('#theme-toggle-btn');
+    var btnM   = $('#theme-toggle-btn-m');
+
+    // Restore saved preference, default to dark
+    var saved = localStorage.getItem('auktivo-theme') || 'dark';
+    htmlEl.setAttribute('data-theme', saved);
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      localStorage.setItem('auktivo-theme', theme);
+    }
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var current = htmlEl.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    if (btnM) {
+      btnM.addEventListener('click', function () {
+        var current = htmlEl.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    }
+  }
+
   /* ── 10. CONTACT MODAL ───────────────────────────────────────── */
   function getModal() { return document.getElementById('contact-modal'); }
 
@@ -299,6 +329,7 @@
 
   /* ── INIT ────────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
+    initThemeToggle();
     initLangToggle();
     initIphoneScreenCycle();
     initShowcaseTabs();
