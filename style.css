@@ -986,3 +986,123 @@ html[data-theme="light"] footer .text-white { color: #0f172a !important; }
 html[data-theme="light"] footer [class*="text-white/"] { color: rgba(15,23,42,0.55) !important; }
 html[data-theme="light"] footer [class*="border-white/"] { border-color: rgba(0,0,0,0.06) !important; }
 html[data-theme="light"] footer a:hover { color: #0f172a !important; }
+
+/* ── 24. LIGHT THEME – iPhone Screens ────────────────────────*/
+html[data-theme="light"] .iphone-inner { background: #f0f4ff !important; }
+html[data-theme="light"] .iphone-island { background: #d1d9f0 !important; }
+
+html[data-theme="light"] .screen-dashboard,
+html[data-theme="light"] .screen-wizard,
+html[data-theme="light"] .screen-favoriten,
+html[data-theme="light"] .screen-calendar { background: #f0f4ff !important; }
+
+html[data-theme="light"] .screen-logo { color: #0f172a !important; }
+
+html[data-theme="light"] .kpi-card {
+  background: rgba(0,0,0,0.05) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html[data-theme="light"] .kpi-label { color: rgba(15,23,42,0.4) !important; }
+html[data-theme="light"] .kpi-value { color: #0f172a !important; }
+html[data-theme="light"] .kpi-amber { color: #d97706 !important; }
+html[data-theme="light"] .kpi-green { color: #059669 !important; }
+html[data-theme="light"] .kpi-blue  { color: #4f46e5 !important; }
+
+html[data-theme="light"] .request-list-item {
+  background: rgba(0,0,0,0.05) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+}
+html[data-theme="light"] .req-name { background: rgba(0,0,0,0.15) !important; }
+html[data-theme="light"] .req-date { background: rgba(0,0,0,0.08) !important; }
+
+html[data-theme="light"] .wstep { background: rgba(0,0,0,0.1) !important; }
+html[data-theme="light"] .wizard-title { color: #0f172a !important; }
+html[data-theme="light"] .wizard-sub   { color: rgba(15,23,42,0.45) !important; }
+html[data-theme="light"] .form-field {
+  background: rgba(0,0,0,0.05) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+html[data-theme="light"] .field-label { color: rgba(15,23,42,0.4) !important; }
+html[data-theme="light"] .field-value { background: rgba(0,0,0,0.12) !important; }
+
+/* ── 25. LIGHT THEME – App Window (Showcase) ─────────────────*/
+html[data-theme="light"] .app-window {
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.1) !important;
+}
+html[data-theme="light"] .app-window-bar {
+  background: #f1f5f9 !important;
+  border-bottom-color: rgba(0,0,0,0.07) !important;
+}
+html[data-theme="light"] .win-url { color: rgba(15,23,42,0.3) !important; }
+html[data-theme="light"] .app-sidebar {
+  background: #f8fafc !important;
+  border-right-color: rgba(0,0,0,0.07) !important;
+}
+html[data-theme="light"] .sidebar-logo-row {
+  border-bottom-color: rgba(0,0,0,0.07) !important;
+}
+html[data-theme="light"] .sidebar-logo-text { color: #0f172a !important; }
+html[data-theme="light"] .sidebar-nav-item { color: rgba(15,23,42,0.45) !important; }
+html[data-theme="light"] .sidebar-nav-item.active {
+  background: rgba(99,102,241,0.09) !important;
+  color: #4f46e5 !important;
+}
+html[data-theme="light"] .sidebar-nav-item:hover:not(.active) {
+  background: rgba(0,0,0,0.04) !important;
+  color: rgba(15,23,42,0.7) !important;
+}
+html[data-theme="light"] .nav-dot { background: rgba(15,23,42,0.15) !important; }
+html[data-theme="light"] .nav-dot.active { background: #6366f1 !important; }
+html[data-theme="light"] .app-content { background: #ffffff !important; }
+html[data-theme="light"] .content-title { color: #0f172a !important; }
+
+/* glass-card-dark → hell (ROI + Showcase) */
+html[data-theme="light"] .glass-card-dark {
+  background: rgba(255,255,255,0.82) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+}
+html[data-theme="light"] .glass-card-dark:hover {
+  border-color: rgba(99,102,241,0.2) !important;
+  background: rgba(255,255,255,0.92) !important;
+}
+
+/* Inline styles mit weißem Text im Showcase / App-Window hell machen */
+html[data-theme="light"] .app-window-body [style*="color:#fff"],
+html[data-theme="light"] .app-window-body [style*="color: #fff"] {
+  color: #0f172a !important;
+}
+html[data-theme="light"] .app-window-body [style*="color:rgba(255,255,255"] {
+  color: rgba(15,23,42,0.55) !important;
+}
+html[data-theme="light"] .app-window-body [style*="color:#e2e8f0"] {
+  color: #1e293b !important;
+}
+html[data-theme="light"] .app-window-body [style*="background:rgba(255,255,255,0.0"],
+html[data-theme="light"] .app-window-body [style*="background: rgba(255,255,255,0.0"] {
+  background: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+}
+html[data-theme="light"] .app-window-body [style*="background:#070b14"],
+html[data-theme="light"] .app-window-body [style*="background: #070b14"],
+html[data-theme="light"] .app-window-body [style*="background:#0f172a"],
+html[data-theme="light"] .app-window-body [style*="background:#1a2235"] {
+  background: #f1f5f9 !important;
+}
+html[data-theme="light"] .app-window-body [style*="border:1px solid rgba(255,255,255"],
+html[data-theme="light"] .app-window-body [style*="border: 1px solid rgba(255,255,255"] {
+  border-color: rgba(0,0,0,0.08) !important;
+}
+/* section-chip-dark in light mode */
+html[data-theme="light"] .section-chip-dark {
+  background: rgba(99,102,241,0.08) !important;
+  border-color: rgba(99,102,241,0.15) !important;
+  color: #6366f1 !important;
+}
+/* innovation-card in light mode */
+html[data-theme="light"] .innovation-card {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%) !important;
+  border-color: rgba(99,102,241,0.2) !important;
+}
+html[data-theme="light"] .innovation-card * { color: #1e1b4b !important; }
